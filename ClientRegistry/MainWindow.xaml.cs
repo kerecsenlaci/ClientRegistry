@@ -24,5 +24,8 @@ namespace ClientRegistry
         {
             InitializeComponent();
         }
+
+
+
     }
 }

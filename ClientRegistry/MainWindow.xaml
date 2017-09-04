@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientRegistry"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Ügyfél nyilvántartó" Height="180" Width="500" WindowStartupLocation="CenterScreen" MinWidth="300" MinHeight="156" MaxWidth="800" MaxHeight="400">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="Adatok rögzítése">
+                <MenuItem  Header="Felhasználók"/>
+                <MenuItem  Header="Partner tipusok"/>
+                <MenuItem  Header="Partnerek"/>
+                <MenuItem  Header="Elérhetőségek"/>
+            </MenuItem>
+            <MenuItem Header="Lekérdezések">
+                <MenuItem  Header="Partnerekszerint">
+                    <MenuItem  Header="Partnerek megyék szerint"/>
+                    <MenuItem  Header="Partnerek tipus szerint"/>
+                </MenuItem>
+                <MenuItem  Header="Elérhetőségszerint">
+                    <MenuItem  Header="Tulajdonosok megyék szerint"/>
+                    <MenuItem  Header="Dolgozók megyék szerint"/>
+                    <MenuItem  Header="Több üzlettel rendelkező tulajdonosok"/>
+                </MenuItem>
+                <MenuItem  Header="Lekérdezés összeálítás"/>
+                <MenuItem  Header="Mentett egyedi lekérdezések"/>
+            </MenuItem>
+            <MenuItem Header="Kilépés"/>
+
+
+        </Menu>
+
+
     </Grid>
 </Window>
