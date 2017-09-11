@@ -25,7 +25,53 @@ namespace ClientRegistry
             InitializeComponent();
         }
 
+        private void ShutdownPrograming(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            ShutdownPrograming(sender, e);
+        }
+
+        private void PartnerTypeClick(object sender, RoutedEventArgs e)
+        {
+            PartnerTypeVM typeVM = new PartnerTypeVM();
+            PartnerTypeWindow typeWindow = new PartnerTypeWindow()
+            {
+                DataContext = typeVM
+            };
+            typeWindow.ShowDialog();
+        }
+
+        private void PartnersClick(object sender, RoutedEventArgs e)
+        {
+            string content;
+            if(sender is Button)
+            {
+                Button button = (Button)sender;
+                content = button.Content.ToString();
+            }
+            else
+            {
+                MenuItem menu = (MenuItem)sender;
+                content = menu.Header.ToString();
+            }
+
+            if (content == "Partnerek")
+            {
+                PartnersVM partnersVM = new PartnersVM();
+                PartnersWindow partners = new PartnersWindow { DataContext = partnersVM, Title=content};
+                partners.Show();
+            }
+            else
+            {
+                ContactsVM contacts = new ContactsVM();
+                PartnersWindow partners = new PartnersWindow { DataContext = contacts, Title=content };
+                partners.Show();
+            }
+        }
 
     }
 }

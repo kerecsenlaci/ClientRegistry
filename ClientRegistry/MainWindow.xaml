@@ -5,22 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientRegistry"
         mc:Ignorable="d"
-        Title="Ügyfél nyilvántartó" Height="180" Width="500" WindowStartupLocation="CenterScreen" MinWidth="300" MinHeight="156" MaxWidth="800" MaxHeight="400">
+        Title="Ügyfél nyilvántartó" Height="180" Width="500" WindowStartupLocation="CenterScreen" MinWidth="300" MinHeight="156" MaxWidth="800" MaxHeight="400" Closed="ShutdownPrograming">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <Menu>
+        <Menu Grid.Column="0" Grid.Row="0">
             <MenuItem Header="Adatok rögzítése">
                 <MenuItem  Header="Felhasználók"/>
-                <MenuItem  Header="Partner tipusok"/>
-                <MenuItem  Header="Partnerek"/>
-                <MenuItem  Header="Elérhetőségek"/>
+                <MenuItem  Header="Partner tipusok" Click="PartnerTypeClick"/>
+                <MenuItem  Header="Partnerek" Click="PartnersClick"/>
+                <MenuItem  Header="Elérhetőségek" Click="PartnersClick"/>
             </MenuItem>
             <MenuItem Header="Lekérdezések">
                 <MenuItem  Header="Partnerekszerint">
@@ -35,11 +34,16 @@
                 <MenuItem  Header="Lekérdezés összeálítás"/>
                 <MenuItem  Header="Mentett egyedi lekérdezések"/>
             </MenuItem>
-            <MenuItem Header="Kilépés"/>
-
-
+            <MenuItem Header="Kilépés" Click="ExitClick"/>
         </Menu>
-
-
+        <GroupBox Grid.Column="0" Grid.Row="1" Header="Gyors menü">
+            <GroupItem>
+                <StackPanel>
+                    <Button Content="Partnerek" Margin="0,0,0,5" Click="PartnersClick"/>
+                    <Button Content="Elérhetőségek" Margin="0,0,0,5" Click="PartnersClick"/>
+                    <Button Content="Lekérdezések" Margin="0,0,0,5"/>
+                </StackPanel>
+            </GroupItem>
+        </GroupBox>
     </Grid>
 </Window>

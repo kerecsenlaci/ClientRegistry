@@ -1,0 +1,35 @@
+﻿<Window x:Class="ClientRegistry.PartnersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientRegistry"
+        mc:Ignorable="d"
+        Title="Partnerek" Height="400" Width="300" WindowStartupLocation="CenterScreen">
+    
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox SelectedItem="{Binding Partner}" ItemsSource="{Binding PartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Name}"/>
+                        <Label Content="{Binding LowerIndex}" FontSize="11"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Keresés:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Text="" Grid.Column="1" Grid.Row="1" MinWidth="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Content="Új Partner" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+
+    </Grid>
+</Window>

@@ -72,14 +72,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="contacts.cs" />
-    <Compile Include="county.cs" />
-    <Compile Include="parameters.cs" />
-    <Compile Include="partners.cs" />
-    <Compile Include="partnertype.cs" />
-    <Compile Include="RegistryModel.cs" />
-    <Compile Include="switch.cs" />
-    <Compile Include="users.cs" />
+    <Compile Include="Class\InternalFunctions.cs" />
+    <Compile Include="DataModel\contacts.cs" />
+    <Compile Include="DataModel\county.cs" />
+    <Compile Include="DataModel\parameters.cs" />
+    <Compile Include="DataModel\partners.cs" />
+    <Compile Include="DataModel\partnertype.cs" />
+    <Compile Include="DataModel\RegistryModel.cs" />
+    <Compile Include="DataModel\switch.cs" />
+    <Compile Include="DataModel\users.cs" />
+    <Compile Include="PartnerFormWindow.xaml.cs">
+      <DependentUpon>PartnerFormWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartnersWindow.xaml.cs">
+      <DependentUpon>PartnersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ContactsVM.cs" />
+    <Compile Include="ViewModel\PartnerFormVM.cs" />
+    <Compile Include="ViewModel\PartnersVM.cs" />
+    <Compile Include="ViewModel\PartnerTypeVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,8 +103,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PartnerFormWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PartnersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PartnerTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PartnerTypeWindow.xaml.cs">
+      <DependentUpon>PartnerTypeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -121,6 +147,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
