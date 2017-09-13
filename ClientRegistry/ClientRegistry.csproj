@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\BaseModel.cs" />
     <Compile Include="Class\InternalFunctions.cs" />
     <Compile Include="DataModel\contacts.cs" />
     <Compile Include="DataModel\county.cs" />

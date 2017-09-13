@@ -27,7 +27,7 @@ namespace ClientRegistry
         private void PartnerFormClick(object sender, MouseButtonEventArgs e)
         {
             PartnerFormVM partnerForm = new PartnerFormVM();
-            partnerForm.Parameter = (partners)((ListBox)sender).SelectedItem;
+            partnerForm.Partner = (partners)((ListBox)sender).SelectedItem;
             PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm  };
             formWindow.ShowDialog();
         }
