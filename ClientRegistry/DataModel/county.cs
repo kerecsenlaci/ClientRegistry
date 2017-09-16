@@ -7,12 +7,12 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.county")]
-    public partial class county
+    public partial class County
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public county()
+        public County()
         {
-            partners = new HashSet<partners>();
+            partners = new HashSet<Partner>();
         }
 
         public int ID { get; set; }
@@ -21,6 +21,6 @@ namespace ClientRegistry
         public string CountyName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<partners> partners { get; set; }
+        public virtual ICollection<Partner> partners { get; set; }
     }
 }

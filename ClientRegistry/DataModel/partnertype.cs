@@ -7,12 +7,12 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.partnertype")]
-    public partial class partnertype
+    public partial class PartnerType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public partnertype()
+        public PartnerType()
         {
-            partners = new HashSet<partners>();
+            partners = new HashSet<Partner>();
         }
 
         public int ID { get; set; }
@@ -27,6 +27,6 @@ namespace ClientRegistry
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<partners> partners { get; set; }
+        public virtual ICollection<Partner> partners { get; set; }
     }
 }

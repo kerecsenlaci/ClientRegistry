@@ -7,13 +7,15 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.partners")]
-    public partial class partners
+    public partial class Partner
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public partners()
+        public Partner()
         {
-            _switch = new HashSet<_switch>();
+            _switch = new HashSet<Switch>();
         }
+
+        public string LowerIndex { get { return $"megye: {county.CountyName}\t\tváros: {City}"; } }
 
         public int ID { get; set; }
 
@@ -36,13 +38,18 @@ namespace ClientRegistry
 
         public int OwnerId { get; set; }
 
-        public virtual contacts contacts { get; set; }
+        public virtual Contact contacts { get; set; }
 
-        public virtual county county { get; set; }
+        public virtual County county { get
+            {
+                RegistryModel registry = new RegistryModel();
+                return registry.county.Find(CountyId);
+            } }
 
-        public virtual partnertype partnertype { get; set; }
+        public virtual PartnerType partnertype { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<_switch> _switch { get; set; }
+        public virtual ICollection<Switch> _switch { get; set; }
     }
 }

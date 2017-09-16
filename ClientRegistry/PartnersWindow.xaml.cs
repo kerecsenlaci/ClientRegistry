@@ -26,10 +26,14 @@ namespace ClientRegistry
 
         private void PartnerFormClick(object sender, MouseButtonEventArgs e)
         {
-            PartnerFormVM partnerForm = new PartnerFormVM();
-            partnerForm.Partner = (partners)((ListBox)sender).SelectedItem;
-            PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm  };
-            formWindow.ShowDialog();
+            PartnersVM partnersVM = DataContext as PartnersVM;
+            if (partnersVM != null && partnersVM.SelectedParameter!=null)
+            {
+                PartnerFormVM partnerForm = new PartnerFormVM { ChosenPartner = partnersVM.SelectedParameter };
+                PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
+                partnerForm.ValuesTransmission();
+                formWindow.ShowDialog();
+            }
         }
     }
 }

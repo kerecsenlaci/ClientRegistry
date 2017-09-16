@@ -7,7 +7,7 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.parameters")]
-    public partial class parameters
+    public partial class Parameter
     {
         public int ID { get; set; }
 

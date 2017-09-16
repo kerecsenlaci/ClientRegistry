@@ -7,13 +7,13 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.contacts")]
-    public partial class contacts
+    public partial class Contact
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public contacts()
+        public Contact()
         {
-            partners = new HashSet<partners>();
-            _switch = new HashSet<_switch>();
+            partners = new HashSet<Partner>();
+            _switch = new HashSet<Switch>();
         }
 
         public string LowerIndex { get { return $"tel.: {Phone}\t\temail: {Email}"; } }
@@ -30,9 +30,9 @@ namespace ClientRegistry
         public int Status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<partners> partners { get; set; }
+        public virtual ICollection<Partner> partners { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<_switch> _switch { get; set; }
+        public virtual ICollection<Switch> _switch { get; set; }
     }
 }

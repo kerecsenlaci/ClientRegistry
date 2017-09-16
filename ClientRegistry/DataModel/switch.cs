@@ -7,7 +7,7 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.switch")]
-    public partial class _switch
+    public partial class Switch
     {
         public int ID { get; set; }
 
@@ -15,8 +15,8 @@ namespace ClientRegistry
 
         public int ContactId { get; set; }
 
-        public virtual contacts contacts { get; set; }
+        public virtual Contact contacts { get; set; }
 
-        public virtual partners partners { get; set; }
+        public virtual Partner partners { get; set; }
     }
 }

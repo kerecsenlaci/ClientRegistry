@@ -7,7 +7,7 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.users")]
-    public partial class users
+    public partial class User
     {
         public int ID { get; set; }
 

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <ListBox SelectedItem="{Binding Partner}" ItemsSource="{Binding PartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick">
+        <ListBox SelectedItem="{Binding SelectedParameter}" ItemsSource="{Binding PartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

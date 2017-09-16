@@ -27,7 +27,7 @@ namespace ClientRegistry
         private void NewPartnerTypeClick(object sender, RoutedEventArgs e)
         {
             var newPartnertype = ((PartnerTypeVM)DataContext).SelectedType;
-            newPartnertype = new partnertype();
+            newPartnertype = new PartnerType();
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)

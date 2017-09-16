@@ -74,14 +74,14 @@
     </ApplicationDefinition>
     <Compile Include="Class\BaseModel.cs" />
     <Compile Include="Class\InternalFunctions.cs" />
-    <Compile Include="DataModel\contacts.cs" />
-    <Compile Include="DataModel\county.cs" />
-    <Compile Include="DataModel\parameters.cs" />
-    <Compile Include="DataModel\partners.cs" />
-    <Compile Include="DataModel\partnertype.cs" />
+    <Compile Include="DataModel\Contact.cs" />
+    <Compile Include="DataModel\County.cs" />
+    <Compile Include="DataModel\Parameter.cs" />
+    <Compile Include="DataModel\Partner.cs" />
+    <Compile Include="DataModel\PartnerType.cs" />
     <Compile Include="DataModel\RegistryModel.cs" />
-    <Compile Include="DataModel\switch.cs" />
-    <Compile Include="DataModel\users.cs" />
+    <Compile Include="DataModel\Switch.cs" />
+    <Compile Include="DataModel\User.cs" />
     <Compile Include="PartnerFormWindow.xaml.cs">
       <DependentUpon>PartnerFormWindow.xaml</DependentUpon>
     </Compile>

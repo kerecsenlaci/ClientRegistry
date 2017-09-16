@@ -9,12 +9,13 @@ namespace ClientRegistry
 {
     class ContactsVM
     {
-        RegistryModel Db = new RegistryModel();
-        public ObservableCollection<contacts> PartnersList { get; set; }
-        public contacts Parameter { get; set; }
+        public ObservableCollection<Contact> PartnersList { get; set; }
+        public Contact SelectedParameter { get; set; }
+
         public ContactsVM()
         {
-            PartnersList = new ObservableCollection<contacts>(Db.contacts.ToList());
+            using(RegistryModel registry = new RegistryModel())
+                PartnersList = new ObservableCollection<Contact>(registry.contacts.ToList());
         }
     }
 }
