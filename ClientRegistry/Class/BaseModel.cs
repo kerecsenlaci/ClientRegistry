@@ -11,10 +11,9 @@ namespace ClientRegistry
     public class BaseModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChange([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChange(string propertyName)
         {
-            PropertyChanged?.Invoke(this,
-                    new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

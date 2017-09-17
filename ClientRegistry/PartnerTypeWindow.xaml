@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Partner tipusok" Height="450" Width="350" MaxHeight="450" MinHeight="450" MaxWidth="350" MinWidth="350" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
-        <ListBox SelectedItem="{Binding SelectedType}" ItemsSource="{Binding PartnerTypeList}" HorizontalAlignment="Left" Height="339" Margin="10,10,0,0" VerticalAlignment="Top" Width="151">
+        <ListBox SelectedItem="{Binding SelectedType}" ItemsSource="{Binding FilteredPartnerTypeList}" HorizontalAlignment="Left" Height="339" Margin="10,10,0,0" VerticalAlignment="Top" Width="151">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -17,7 +17,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Partnertipus megnevezése:" HorizontalAlignment="Left" Margin="166,33,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,81,0,0" TextWrapping="Wrap" Text="{Binding SelectedType.Name}" VerticalAlignment="Top" Width="152" IsReadOnly="False"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,81,0,0" TextWrapping="Wrap" Text="{Binding SelectedType.Name,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" IsReadOnly="{Binding IsEnabled}"/>
         <Button Content="Új hozzáad" HorizontalAlignment="Left" Margin="10,372,0,0" VerticalAlignment="Top" Width="75" Click="NewPartnerTypeClick"/>
         <Button Content="Módosítás" HorizontalAlignment="Left" Margin="90,372,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Mentés" HorizontalAlignment="Left" Margin="170,372,0,0" VerticalAlignment="Top" Width="75" Click="SaveClick"/>

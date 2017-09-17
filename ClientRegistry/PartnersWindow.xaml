@@ -16,7 +16,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <ListBox SelectedItem="{Binding SelectedParameter}" ItemsSource="{Binding PartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick">
+        <ListBox SelectedItem="{Binding SelectedParameter}" ItemsSource="{Binding FilteredPartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -27,8 +27,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Keresés:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="1" Grid.Row="1" MinWidth="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="Új Partner" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBox Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" MinWidth="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Content="Új Partner" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Click="NewPartnerFormClick"/>
 
 
     </Grid>

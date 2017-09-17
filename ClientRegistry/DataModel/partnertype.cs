@@ -7,7 +7,7 @@ namespace ClientRegistry
     using System.Data.Entity.Spatial;
 
     [Table("registrydata.partnertype")]
-    public partial class PartnerType
+    public partial class PartnerType:BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PartnerType()
@@ -15,11 +15,12 @@ namespace ClientRegistry
             partners = new HashSet<Partner>();
         }
 
+        string _name;
+       
         public int ID { get; set; }
 
         [StringLength(40)]
-        public string Name { get; set; }
-
+        public string Name { get { return _name; } set { _name = value; OnPropertyChange("Name"); } }
 
         public bool ValidateType()
         {

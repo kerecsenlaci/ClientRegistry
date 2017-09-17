@@ -26,13 +26,53 @@ namespace ClientRegistry
 
         private void PartnerFormClick(object sender, MouseButtonEventArgs e)
         {
-            PartnersVM partnersVM = DataContext as PartnersVM;
-            if (partnersVM != null && partnersVM.SelectedParameter!=null)
+            if(DataContext is PartnersVM)
             {
-                PartnerFormVM partnerForm = new PartnerFormVM { ChosenPartner = partnersVM.SelectedParameter };
-                PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
-                partnerForm.ValuesTransmission();
-                formWindow.ShowDialog();
+                PartnersVM partnersVM = DataContext as PartnersVM;
+                if (partnersVM != null && partnersVM.SelectedParameter != null)
+                {
+                    PartnerFormVM partnerForm = new PartnerFormVM { ChosenPartner = partnersVM.SelectedParameter, IsEdit = true };
+                    PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
+                    partnerForm.ValuesTransmission();
+                    formWindow.ShowDialog();
+                }
+            }
+            else
+            {
+                ContactsVM contactsVM = DataContext as ContactsVM;
+                if(contactsVM!=null && contactsVM.SelectedParameter != null)
+                {
+                    ContactFormVM contactForm = new ContactFormVM { ChosenContact = contactsVM.SelectedParameter,IsEdit=true };
+                    ContactFormWindow formWindow = new ContactFormWindow { DataContext = contactForm };
+                    contactForm.CopyContact();
+                    formWindow.ShowDialog();
+                }
+            }
+            
+        }
+
+        private void NewPartnerFormClick(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PartnersVM)
+            {
+                PartnersVM partnersVM = DataContext as PartnersVM;
+                if (partnersVM != null)
+                {
+                    PartnerFormVM partnerForm = new PartnerFormVM { ChosenPartner = new Partner(), IsEdit = false };
+                    PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
+                    partnerForm.ValuesTransmission();
+                    formWindow.ShowDialog();
+                }
+            }
+            else
+            {
+                ContactsVM contactsVM = DataContext as ContactsVM;
+                if (contactsVM != null)
+                {
+                    ContactFormVM contactForm = new ContactFormVM { ChosenContact = new Contact(), IsEdit = false };
+                    ContactFormWindow formWindow = new ContactFormWindow { DataContext = contactForm };
+                    formWindow.ShowDialog();
+                }
             }
         }
     }

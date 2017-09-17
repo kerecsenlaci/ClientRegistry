@@ -19,6 +19,7 @@ namespace ClientRegistry
     /// </summary>
     public partial class PartnerTypeWindow : Window
     {
+
         public PartnerTypeWindow()
         {
             InitializeComponent();
@@ -26,21 +27,14 @@ namespace ClientRegistry
 
         private void NewPartnerTypeClick(object sender, RoutedEventArgs e)
         {
-            var newPartnertype = ((PartnerTypeVM)DataContext).SelectedType;
-            newPartnertype = new PartnerType();
+            var typeVM = (PartnerTypeVM)DataContext;
+            typeVM.IsEnabled = false;
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            if (((PartnerTypeVM)DataContext).SelectedType.ValidateType())
-            {
-                RegistryModel registry = new RegistryModel();
-                registry.partnertype.Add(((PartnerTypeVM)DataContext).SelectedType);
-                registry.SaveChanges();
-            }
-            else
-                MessageBox.Show("Hibás adatbevitel", "Figyelmeztetés");
-
+            //if (!typeVM.SavePartnerType())
+            //    MessageBox.Show("Hibás adatbevitel", "Figyelmeztetés");
         }
     }
 }

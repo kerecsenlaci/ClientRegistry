@@ -23,5 +23,19 @@ namespace ClientRegistry
         {
             InitializeComponent();
         }
+
+        private void SavePartnerForm(object sender, RoutedEventArgs e)
+        {
+            string message;
+            var formVM = DataContext as PartnerFormVM;
+            if (!formVM.PartnerValidate(out message))
+                MessageBox.Show(message);
+            else
+            {
+                formVM.SavePartner();
+                Close();
+            }
+                
+        }
     }
 }
