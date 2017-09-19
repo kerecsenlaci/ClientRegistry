@@ -1,0 +1,16 @@
+﻿<Window x:Class="ClientRegistry.ReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientRegistry"
+        xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        mc:Ignorable="d"
+        Title="Nyopmtatási kép" Height="800" Width="600">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <WindowsFormsHost HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" >
+            <rv:ReportViewer x:Name="reportViewer" RenderingComplete="reportViewer_RenderingComplete" />
+        </WindowsFormsHost>
+
+    </Grid>
+</Window>

@@ -70,5 +70,10 @@ namespace ClientRegistry
             }
         }
 
+        private void ReportWindowClick(object sender, RoutedEventArgs e)
+        {
+            ReportWindow report = new ReportWindow();
+            report.Show();
+        }
     }
 }

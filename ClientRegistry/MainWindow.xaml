@@ -23,13 +23,13 @@
             </MenuItem>
             <MenuItem Header="Lekérdezések">
                 <MenuItem  Header="Partnerekszerint">
-                    <MenuItem  Header="Partnerek megyék szerint"/>
-                    <MenuItem  Header="Partnerek tipus szerint"/>
+                    <MenuItem  Header="Partnerek megyék szerint" Click="ReportWindowClick"/>
+                    <MenuItem  Header="Partnerek tipus szerint" Click="ReportWindowClick"/>
                 </MenuItem>
                 <MenuItem  Header="Elérhetőségszerint">
-                    <MenuItem  Header="Tulajdonosok megyék szerint"/>
-                    <MenuItem  Header="Dolgozók megyék szerint"/>
-                    <MenuItem  Header="Több üzlettel rendelkező tulajdonosok"/>
+                    <MenuItem  Header="Tulajdonosok megyék szerint" Click="ReportWindowClick"/>
+                    <MenuItem  Header="Dolgozók megyék szerint" Click="ReportWindowClick"/>
+                    <MenuItem  Header="Több üzlettel rendelkező tulajdonosok" Click="ReportWindowClick"/>
                 </MenuItem>
                 <MenuItem  Header="Lekérdezés összeálítás"/>
                 <MenuItem  Header="Mentett egyedi lekérdezések"/>
