@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CRegistry.Dal;
 
 namespace ClientRegistry
 {
@@ -11,8 +12,9 @@ namespace ClientRegistry
     {
         private string _searchText;
 
-       
+        public int? IsPartnerAdd { get; set; }
         public ObservableCollection<Contact> PartnersList { get; set; }
+        public ObservableCollection<Contact> PartnerContactList { get; set; }
         public Contact SelectedParameter { get; set; }
         public IEnumerable<Contact> FilteredPartnersList
         { get { if (SearchText == null) return PartnersList;
@@ -30,8 +32,30 @@ namespace ClientRegistry
 
         public ContactsVM()
         {
-            using(RegistryModel registry = new RegistryModel())
-                PartnersList = new ObservableCollection<Contact>(registry.contacts.ToList());
+            
+        }
+
+        public void LoadPartnersList()
+        {
+            Context context = new Context();
+            PartnersList = new ObservableCollection<Contact>();
+            if (IsPartnerAdd == null)
+                foreach (var item in context.ContactList)
+                    PartnersList.Add(new Contact(item));
+            else
+                foreach (var item in context.ContactList)
+                    if (!context.SwitchList.Where(x => x.PartnerId == IsPartnerAdd).ToList().Exists(x => x.ContactId == item.ID && x.PartnerId == IsPartnerAdd))
+                        PartnersList.Add(new Contact(item));
+        }
+
+        internal void AddContact()
+        {
+            using (RegistryModel registry = new RegistryModel())
+            {
+                registry._switch.Add(new SwitchDbModel { PartnerId = (int)IsPartnerAdd, ContactId = SelectedParameter.ID });
+                registry.SaveChanges();
+            }
+            PartnerContactList.Add(SelectedParameter);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRegistry.Dal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,11 @@ namespace ClientRegistry
         public Contact ChosenContact { get; set; }
         public Contact BackupContact { get; set; }
         public bool IsEdit { get; set; }
+
+        public ContactFormVM()
+        {
+           
+        }
 
         public bool ChosenContactValidate(out string message)
         {
@@ -36,20 +42,22 @@ namespace ClientRegistry
         internal void SavePartner()
         {
             if (IsEdit)
+            {
                 using (RegistryModel registry = new RegistryModel())
                 {
-                    var UpdatePartner = registry.contacts.Where(p => p.ID == ChosenContact.ID).FirstOrDefault();
+                    var UpdatePartner = registry.contacts.FirstOrDefault(p => p.ID == ChosenContact.ID);
                     UpdatePartner.Name = ChosenContact.Name;
                     UpdatePartner.Phone = ChosenContact.Phone;
                     UpdatePartner.Email = ChosenContact.Email;
                     UpdatePartner.Status = ChosenContact.Status;
                     registry.SaveChanges();
                 }
+            }  
             else
             {
                 using (RegistryModel registry = new RegistryModel())
                 {
-                    registry.contacts.Add(ChosenContact);
+                    registry.contacts.Add(new ContactDbModel { Name= ChosenContact.Name,Email=ChosenContact.Email,Phone=ChosenContact.Phone,Status=ChosenContact.Status});
                     registry.SaveChanges();
                 }
             }
@@ -57,14 +65,11 @@ namespace ClientRegistry
 
         public bool IsModified()
         {
-
-            return ChosenContact.Name != BackupContact.Name && ChosenContact.Phone == BackupContact.Phone && ChosenContact.Email == BackupContact.Email && ChosenContact.Status == BackupContact.Status;
-           
+            return ChosenContact.Name != BackupContact.Name || ChosenContact.Phone != BackupContact.Phone || ChosenContact.Email != BackupContact.Email || ChosenContact.Status != BackupContact.Status;
         }
 
         public void CopyContact()
         {
-
             BackupContact = new Contact
             {
                 Name = ChosenContact.Name,

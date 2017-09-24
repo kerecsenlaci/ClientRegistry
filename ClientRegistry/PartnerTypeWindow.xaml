@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientRegistry"
         mc:Ignorable="d"
-        Title="Partner tipusok" Height="450" Width="350" MaxHeight="450" MinHeight="450" MaxWidth="350" MinWidth="350" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="Partner tipusok" Height="450" Width="350" MaxHeight="450" MinHeight="450" MaxWidth="350" MinWidth="350" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="WindowClosing">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
-        <ListBox SelectedItem="{Binding SelectedType}" ItemsSource="{Binding FilteredPartnerTypeList}" HorizontalAlignment="Left" Height="339" Margin="10,10,0,0" VerticalAlignment="Top" Width="151">
+        <ListBox SelectedItem="{Binding SelectedType}" ItemsSource="{Binding FilteredPartnerTypeList}" HorizontalAlignment="Left" Height="339" Margin="10,10,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -16,12 +22,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Partnertipus megnevezése:" HorizontalAlignment="Left" Margin="166,33,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,81,0,0" TextWrapping="Wrap" Text="{Binding SelectedType.Name,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" IsReadOnly="{Binding IsEnabled}"/>
+        <Label Content="Partnertipus megnevezése:" HorizontalAlignment="Left" Margin="166,33,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="166,81,0,0" TextWrapping="Wrap" Text="{Binding SelectedType.Name,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152" IsEnabled="{Binding IsEnabled}"/>
         <Button Content="Új hozzáad" HorizontalAlignment="Left" Margin="10,372,0,0" VerticalAlignment="Top" Width="75" Click="NewPartnerTypeClick"/>
-        <Button Content="Módosítás" HorizontalAlignment="Left" Margin="90,372,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Módosítás" HorizontalAlignment="Left" Margin="90,372,0,0" VerticalAlignment="Top" Width="75" Click="ChangeClick"/>
         <Button Content="Mentés" HorizontalAlignment="Left" Margin="170,372,0,0" VerticalAlignment="Top" Width="75" Click="SaveClick"/>
-        <Button Content="Törlés" HorizontalAlignment="Left" Margin="250,372,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Törlés" HorizontalAlignment="Left" Margin="250,372,0,0" VerticalAlignment="Top" Width="75" Click="RemoveClick"/>
 
     </Grid>
 </Window>

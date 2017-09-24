@@ -1,38 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CRegistry.Dal;
+
 namespace ClientRegistry
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    [Table("registrydata.contacts")]
-    public partial class Contact
+    class Contact:BaseModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contact()
-        {
-            partners = new HashSet<Partner>();
-            _switch = new HashSet<Switch>();
-        }
+        int _id;
+        string _name;
+        string _phone;
+        string _email;
+        int _status;
 
+        public int ID { get { return _id; } set { _id = value; OnPropertyChange("ID"); } }
+        public string Name { get { return _name; } set { _name = value; OnPropertyChange("Name"); } }
+        public string Phone { get { return _phone; } set { _phone = value; OnPropertyChange("Phone"); OnPropertyChange("LowerIndex"); } }
+        public string Email { get { return _email; } set { _email = value; OnPropertyChange("Email"); OnPropertyChange("LowerIndex"); } }
+        public int Status { get { return _status; } set { _status = value; OnPropertyChange("Status"); } }
         public string LowerIndex { get { return $"tel.: {Phone}\t\temail: {Email}"; } }
 
-        public int ID { get; set; }
+        public Contact()
+        {
 
-        [StringLength(40)]
-        public string Name { get; set; }
+        }
 
-        public string Phone { get; set; }
-
-        public string Email { get; set; }
-
-        public int Status { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partner> partners { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Switch> _switch { get; set; }
+        public Contact(ContactDbModel contact)
+        {
+            ID = contact.ID;
+            Name = contact.Name;
+            Phone = contact.Phone;
+            Email = contact.Email;
+            Status = contact.Status;
+            
+        }
     }
 }

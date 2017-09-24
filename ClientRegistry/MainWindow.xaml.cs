@@ -37,8 +37,7 @@ namespace ClientRegistry
 
         private void PartnerTypeClick(object sender, RoutedEventArgs e)
         {
-            PartnerTypeVM typeVM = new PartnerTypeVM();
-            PartnerTypeWindow typeWindow = new PartnerTypeWindow() { DataContext = typeVM};
+            PartnerTypeWindow typeWindow = new PartnerTypeWindow();
             typeWindow.ShowDialog();
         }
 
@@ -66,6 +65,7 @@ namespace ClientRegistry
             {
                 ContactsVM contacts = new ContactsVM();
                 PartnersWindow partners = new PartnersWindow { DataContext = contacts, Title=content };
+                contacts.LoadPartnersList();
                 partners.Show();
             }
         }

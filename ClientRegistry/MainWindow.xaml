@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:ClientRegistry"
         mc:Ignorable="d"
         Title="Ügyfél nyilvántartó" Height="180" Width="500" WindowStartupLocation="CenterScreen" MinWidth="300" MinHeight="156" MaxWidth="800" MaxHeight="400" Closed="ShutdownPrograming">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -14,29 +20,32 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0">
+        <Menu Grid.Column="0" Grid.Row="0" Foreground="White"  Background="Transparent">
             <MenuItem Header="Adatok rögzítése">
-                <MenuItem  Header="Felhasználók"/>
-                <MenuItem  Header="Partner tipusok" Click="PartnerTypeClick"/>
-                <MenuItem  Header="Partnerek" Click="PartnersClick"/>
-                <MenuItem  Header="Elérhetőségek" Click="PartnersClick"/>
+                <MenuItem  Header="Felhasználók" Foreground="Black"/>
+                <Separator/>
+                <MenuItem  Header="Partner tipusok" Foreground="Black" Click="PartnerTypeClick"/>
+                <MenuItem  Header="Partnerek" Foreground="Black" Click="PartnersClick"/>
+                <MenuItem  Header="Elérhetőségek" Foreground="Black" Click="PartnersClick"/>
             </MenuItem>
             <MenuItem Header="Lekérdezések">
-                <MenuItem  Header="Partnerekszerint">
-                    <MenuItem  Header="Partnerek megyék szerint" Click="ReportWindowClick"/>
+                <MenuItem  Header="Partnerekszerint" Foreground="Black">
+                    <MenuItem  Header="Partnerek megyék szerint" Click="ReportWindowClick" />
                     <MenuItem  Header="Partnerek tipus szerint" Click="ReportWindowClick"/>
                 </MenuItem>
-                <MenuItem  Header="Elérhetőségszerint">
+                <MenuItem  Header="Elérhetőségszerint" Foreground="Black">
                     <MenuItem  Header="Tulajdonosok megyék szerint" Click="ReportWindowClick"/>
                     <MenuItem  Header="Dolgozók megyék szerint" Click="ReportWindowClick"/>
                     <MenuItem  Header="Több üzlettel rendelkező tulajdonosok" Click="ReportWindowClick"/>
                 </MenuItem>
-                <MenuItem  Header="Lekérdezés összeálítás"/>
-                <MenuItem  Header="Mentett egyedi lekérdezések"/>
+                <Separator/>
+                <MenuItem  Header="Lekérdezés összeálítás" Foreground="Black"/>
+                <MenuItem  Header="Mentett egyedi lekérdezések" Foreground="Black"/>
             </MenuItem>
+            <MenuItem Header="Beállítások"/>
             <MenuItem Header="Kilépés" Click="ExitClick"/>
         </Menu>
-        <GroupBox Grid.Column="0" Grid.Row="1" Header="Gyors menü">
+        <GroupBox Grid.Column="0" Grid.Row="1" Header="Gyors menü" Foreground="White">
             <GroupItem>
                 <StackPanel>
                     <Button Content="Partnerek" Margin="0,0,0,5" Click="PartnersClick"/>

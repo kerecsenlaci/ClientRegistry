@@ -1,55 +1,50 @@
+﻿using CRegistry.Dal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace ClientRegistry
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    [Table("registrydata.partners")]
-    public partial class Partner
+    class Partner:BaseModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Partner()
-        {
-            _switch = new HashSet<Switch>();
-        }
-
-        public string LowerIndex { get { return $"megye: {county.CountyName}\t\tv�ros: {City}"; } }
+        string _name;
+        string _city;
+        int? _countyId;
 
         public int ID { get; set; }
-
-        [StringLength(80)]
-        public string Name { get; set; }
-
+        public string Name { get { return _name; } set { _name = value; OnPropertyChange("Name"); } }
         public int? TypeId { get; set; }
-
-        public int? CountyId { get; set; }
-
+        public int? CountyId { get { return _countyId; } set { _countyId = value; OnPropertyChange("CountyId"); OnPropertyChange("CityName"); OnPropertyChange("LowerIndex"); } }
         public int ZipCode { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string City { get; set; }
-
-        [Required]
-        [StringLength(60)]
+        public string City { get { return _city; } set { _city = value; OnPropertyChange("City"); OnPropertyChange("LowerIndex"); } }
         public string Address { get; set; }
-
         public int OwnerId { get; set; }
-
-        public virtual Contact contacts { get; set; }
-
-        public virtual County county { get
+        public string LowerIndex { get { return $"megye: {CityName}\t\tváros: {City}"; } }
+        string CityName {
+            get
             {
-                RegistryModel registry = new RegistryModel();
-                return registry.county.Find(CountyId);
-            } }
+                using(RegistryModel registry = new RegistryModel())
+                    return registry.county.FirstOrDefault(x => x.ID == CountyId).CountyName;
+            }
+        }
 
-        public virtual PartnerType partnertype { get; set; }
+        public Partner()
+        {
 
+        }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Switch> _switch { get; set; }
+        public Partner(PartnerDbModel partnerDb)
+        {
+            ID = partnerDb.ID;
+            Name = partnerDb.Name;
+            TypeId = partnerDb.TypeId;
+            CountyId = partnerDb.CountyId;
+            ZipCode = partnerDb.ZipCode;
+            City = partnerDb.City;
+            Address = partnerDb.Address;
+            OwnerId = partnerDb.OwnerId;
+        }
     }
 }

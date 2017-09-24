@@ -40,6 +40,7 @@ namespace ClientRegistry
             else
             {
                 formVM.SavePartner();
+                formVM.CopyContact();
                 Close();
             }
                 

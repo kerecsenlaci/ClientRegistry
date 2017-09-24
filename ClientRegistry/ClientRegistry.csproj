@@ -59,10 +59,6 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.340.80\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -105,11 +101,8 @@
     </Compile>
     <Compile Include="DataModel\Contact.cs" />
     <Compile Include="DataModel\County.cs" />
-    <Compile Include="DataModel\Parameter.cs" />
     <Compile Include="DataModel\Partner.cs" />
     <Compile Include="DataModel\PartnerType.cs" />
-    <Compile Include="DataModel\RegistryModel.cs" />
-    <Compile Include="DataModel\Switch.cs" />
     <Compile Include="DataModel\User.cs" />
     <Compile Include="PartnerFormWindow.xaml.cs">
       <DependentUpon>PartnerFormWindow.xaml</DependentUpon>
@@ -120,7 +113,6 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\ContactFormVM.cs" />
     <Compile Include="ViewModel\ContactsVM.cs" />
     <Compile Include="ViewModel\PartnerFormVM.cs" />
@@ -191,19 +183,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\CRegistry.Dal\CRegistry.Dal.csproj">
+      <Project>{7c7e081c-a288-42b0-8d2d-2a09027b057e}</Project>
+      <Name>CRegistry.Dal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

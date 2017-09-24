@@ -19,22 +19,57 @@ namespace ClientRegistry
     /// </summary>
     public partial class PartnerTypeWindow : Window
     {
-
+        PartnerTypeVM typeVM = new PartnerTypeVM();
         public PartnerTypeWindow()
         {
             InitializeComponent();
+            DataContext = typeVM;
         }
 
         private void NewPartnerTypeClick(object sender, RoutedEventArgs e)
         {
-            var typeVM = (PartnerTypeVM)DataContext;
-            typeVM.IsEnabled = false;
+            typeVM.SelectedType = new PartnerType();
+            typeVM.IsEnabled = true;
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            //if (!typeVM.SavePartnerType())
-            //    MessageBox.Show("Hibás adatbevitel", "Figyelmeztetés");
+            if (typeVM.SelectedType!=null)
+                if (!typeVM.SavePartnerType())
+                    MessageBox.Show("Hibás adatbevitel", "Figyelmeztetés");
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            typeVM.IsEnabled = false;
+        }
+
+        private void ChangeClick(object sender, RoutedEventArgs e)
+        {
+            if(typeVM.SelectedType!=null)
+                typeVM.IsEnabled = true;
+        }
+
+        private void RemoveClick(object sender, RoutedEventArgs e)
+        {
+            if(typeVM.SelectedType!=null)
+                if (MessageBoxResult.Yes == MessageBox.Show("Biztos hogy törlöni szeretné?","Figyelmeztetés",MessageBoxButton.YesNo) && !typeVM.RemovePartnerType())
+                    MessageBox.Show("Nem választott elemet!\n\rVagy nem mentett elemet szeretne törölni!", "Figyelmeztetés");
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (typeVM.IsEnabled && typeVM.SelectedType.ValidateType())
+            {
+                var result = MessageBox.Show("Szerkesztés alatt van!\n\rSzeretné menteni a változásokat?", "Figyelmeztetés", MessageBoxButton.YesNo);
+                if(result==MessageBoxResult.Yes)
+                    if (!typeVM.SavePartnerType())
+                    {
+                        MessageBox.Show("Hibás adatbevitel", "Figyelmeztetés");
+                        e.Cancel = true;
+                    }
+                        
+            }
         }
     }
 }

@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace ClientRegistry
 {
@@ -33,9 +21,38 @@ namespace ClientRegistry
             else
             {
                 formVM.SavePartner();
+                formVM.CopyChosenPartner();
                 Close();
             }
-                
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+            var formVM = DataContext as PartnerFormVM;
+            if (formVM.IsEdit && formVM.IsModified())
+            {
+                var result = MessageBox.Show("Nem mentett változások vannak.\n\rSzeretné menteni?", "Figyelmeztetés", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    formVM.SavePartner();
+                else
+                    formVM.RestoreContact();
+            }
+        }
+
+        private void ContactAddClick(object sender, RoutedEventArgs e)
+        {
+            ContactsVM contacts = new ContactsVM { IsPartnerAdd = ((PartnerFormVM)DataContext).ChosenPartner.ID,PartnerContactList= ((PartnerFormVM)DataContext).ContactsList };
+            PartnersWindow partners = new PartnersWindow { DataContext = contacts, Title = "Elérhetőségek" };
+            contacts.LoadPartnersList();
+            partners.Show();
+        }
+
+        private void ContactRemoveClick(object sender, RoutedEventArgs e)
+        {
+            var formVM = DataContext as PartnerFormVM;
+            if (formVM.SelectedContact != null)
+                formVM.RemoveContact();
         }
     }
 }

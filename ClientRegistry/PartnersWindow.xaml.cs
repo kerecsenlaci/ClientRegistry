@@ -40,8 +40,14 @@ namespace ClientRegistry
             else
             {
                 ContactsVM contactsVM = DataContext as ContactsVM;
-                if(contactsVM!=null && contactsVM.SelectedParameter != null)
+                if(contactsVM!=null && contactsVM.SelectedParameter != null && contactsVM.IsPartnerAdd!=null)
                 {
+                    contactsVM.AddContact();
+                    contactsVM.PartnersList.Remove(contactsVM.SelectedParameter);
+                    return;
+                }
+                if(contactsVM!=null && contactsVM.SelectedParameter != null)
+                    {
                     ContactFormVM contactForm = new ContactFormVM { ChosenContact = contactsVM.SelectedParameter,IsEdit=true };
                     ContactFormWindow formWindow = new ContactFormWindow { DataContext = contactForm };
                     contactForm.CopyContact();

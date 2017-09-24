@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRegistry.Dal;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,8 +21,12 @@ namespace ClientRegistry
 
         public PartnersVM()
         {
-            using(RegistryModel registry = new RegistryModel())
-                PartnersList = new ObservableCollection<Partner>(registry.partners.ToList());
+            Context context = new Context();
+            PartnersList = new ObservableCollection<Partner>();
+            foreach (var item in context.PartnerList)
+            {
+                PartnersList.Add(new Partner(item));
+            }
         }
     }
 }

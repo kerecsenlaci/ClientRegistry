@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:ClientRegistry"
         mc:Ignorable="d"
         Title="Kapcsolattartó űrlap" Height="300" Width="350" WindowStartupLocation="CenterScreen" MinHeight="300" MaxHeight="300" MaxWidth="350" MinWidth="350" Closing="WindowClosing">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,10 +24,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Név:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="Telefonszám:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"/>
-        <Label Content="Email cím:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2"/>
-        <Label Content="Sátusz:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3"/>
+        <Label Content="Név:" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White"/>
+        <Label Content="Telefonszám:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Foreground="White"/>
+        <Label Content="Email cím:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Foreground="White"/>
+        <Label Content="Sátusz:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Foreground="White"/>
         <TextBox Text="{Binding ChosenContact.Name,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1"/>
         <TextBox Text="{Binding ChosenContact.Phone,UpdateSourceTrigger=PropertyChanged}" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1" Grid.Row="1" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox Text="{Binding ChosenContact.Email,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1" Grid.Row="2"/>
