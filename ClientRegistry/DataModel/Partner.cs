@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClientRegistry
 {
-    class Partner:BaseModel
+    public class Partner:BaseModel
     {
         string _name;
         string _city;

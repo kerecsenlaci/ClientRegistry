@@ -172,7 +172,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Rdlc\PartnerForm.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Contact.datasource" />
+    <None Include="Properties\DataSources\Partner.datasource" />
+    <None Include="Properties\DataSources\PartnerFormVM.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -187,6 +191,9 @@
       <Project>{7c7e081c-a288-42b0-8d2d-2a09027b057e}</Project>
       <Name>CRegistry.Dal</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

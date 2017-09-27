@@ -80,5 +80,13 @@ namespace ClientRegistry
                 }
             }
         }
+
+        private void ReportClick(object sender, RoutedEventArgs e)
+        {
+            var formVM = DataContext as PartnerFormVM;
+            
+            ReportWindow window = new ReportWindow(formVM.ChosenPartner,formVM.SelectedOwner.Name,formVM.ContactsList);
+            window.Show();
+        }
     }
 }

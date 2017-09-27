@@ -5,7 +5,7 @@ using System;
 
 namespace ClientRegistry
 {
-    class PartnerFormVM:BaseModel
+    public class PartnerFormVM:BaseModel
     {
         County _selectedCounty;
         PartnerType _selectedType;

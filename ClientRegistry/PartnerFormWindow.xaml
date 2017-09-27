@@ -73,5 +73,6 @@
         <Button Content="Mentés" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Width="100" Margin="0,15,40,16" Click="SavePartnerForm" Grid.Column="1"/>
         <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="30" Margin="20,5,0,26" Click="ContactAddClick"/>
         <Button Content="-" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="30" Margin="60,5,0,26" Click="ContactRemoveClick"/>
+        <Button Content="Nyomtatási kép" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Width="100" Margin="0,15,36,16" Click="ReportClick"/>
     </Grid>
 </Window>

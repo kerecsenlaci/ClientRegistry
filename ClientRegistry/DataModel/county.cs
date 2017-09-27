@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientRegistry
 {
-    class County
+    public class County
     {
         public int ID { get; set; }
 
