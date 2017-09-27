@@ -22,6 +22,7 @@ namespace ClientRegistry
         public PartnerType SelectedType { get { return _selectedType; } set { _selectedType = value; OnPropertyChange("SelectedType"); ChosenPartner.TypeId = value.ID; } }
         public Contact SelectedOwner { get { return _selectedContact; } set { _selectedContact = value; OnPropertyChange("SelectedContact"); ChosenPartner.OwnerId = value.ID; } }
         public Contact SelectedContact { get; set; }
+        public string[] DropFiles { get; set; }
 
         public PartnerFormVM()
         {

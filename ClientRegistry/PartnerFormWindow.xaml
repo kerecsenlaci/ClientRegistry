@@ -13,12 +13,16 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="14*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -49,7 +53,7 @@
             <Label Content="Cím:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Foreground="White"/>
             <TextBox Text="{Binding ChosenPartner.Address,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Margin="50,0,0,0" Grid.Column="1" Grid.Row="2"/>
         </Grid>
-        <ListBox ItemsSource="{Binding ContactsList}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" Margin="10,0">
+        <ListBox ItemsSource="{Binding ContactsList}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" Margin="10,0" AllowDrop="True" Grid.ColumnSpan="2" Drop="ListBox_Drop">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -66,8 +70,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Mentés" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Width="100" Margin="0,0,40,0" Click="SavePartnerForm"/>
-        <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="30" Margin="20,0,0,20" Click="ContactAddClick"/>
-        <Button Content="-" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="30" Margin="60,0,0,20" Click="ContactRemoveClick"/>
+        <Button Content="Mentés" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Width="100" Margin="0,15,40,16" Click="SavePartnerForm" Grid.Column="1"/>
+        <Button Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="30" Margin="20,5,0,26" Click="ContactAddClick"/>
+        <Button Content="-" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="30" Margin="60,5,0,26" Click="ContactRemoveClick"/>
     </Grid>
 </Window>

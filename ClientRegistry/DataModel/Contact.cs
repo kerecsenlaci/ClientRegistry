@@ -7,7 +7,7 @@ using CRegistry.Dal;
 
 namespace ClientRegistry
 {
-    class Contact:BaseModel
+    public class Contact:BaseModel
     {
         int _id;
         string _name;

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 
 namespace ClientRegistry
 {
@@ -53,6 +54,31 @@ namespace ClientRegistry
             var formVM = DataContext as PartnerFormVM;
             if (formVM.SelectedContact != null)
                 formVM.RemoveContact();
+        }
+
+        private void ListBox_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var formVM = DataContext as PartnerFormVM;
+                formVM.DropFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+                try
+                {
+                    FileOperations.FileFormatValidate(formVM.DropFiles);
+                }
+                catch (FileFormatException)
+                {
+                    MessageBox.Show("Nem megfelelő fájlformátum!");
+                    return;
+                }
+                foreach (var file in formVM.DropFiles)
+                {
+                    var cformVm = new ContactFormVM();
+                    var window = new ContactFormWindow() { DataContext = cformVm};
+                    FileOperations.ProcessingFile(file, cformVm.ChosenContact=new Contact());
+                    window.ShowDialog();
+                }
+            }
         }
     }
 }

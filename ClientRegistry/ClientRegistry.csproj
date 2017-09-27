@@ -95,7 +95,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\BaseModel.cs" />
-    <Compile Include="Class\InternalFunctions.cs" />
+    <Compile Include="Class\FileOperations.cs" />
     <Compile Include="ContactFormWindow.xaml.cs">
       <DependentUpon>ContactFormWindow.xaml</DependentUpon>
     </Compile>
