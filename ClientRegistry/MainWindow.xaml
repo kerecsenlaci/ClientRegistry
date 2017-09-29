@@ -30,13 +30,13 @@
             </MenuItem>
             <MenuItem Header="Lekérdezések">
                 <MenuItem  Header="Partnerekszerint" Foreground="Black">
-                    <MenuItem  Header="Partnerek megyék szerint" Click="ReportWindowClick" />
-                    <MenuItem  Header="Partnerek tipus szerint" Click="ReportWindowClick"/>
+                    <MenuItem  Header="Partnerek megyék szerint" Click="PartnerQueryClick" />
+                    <MenuItem  Header="Partnerek tipus szerint" Click="PartnerQueryClick"/>
                 </MenuItem>
                 <MenuItem  Header="Elérhetőségszerint" Foreground="Black">
-                    <MenuItem  Header="Tulajdonosok megyék szerint" Click="ReportWindowClick"/>
-                    <MenuItem  Header="Dolgozók megyék szerint" Click="ReportWindowClick"/>
-                    <MenuItem  Header="Több üzlettel rendelkező tulajdonosok" Click="ReportWindowClick"/>
+                    <MenuItem  Header="Tulajdonosok listája" Click="ContactQueryClick"/>
+                    <MenuItem  Header="Alkalmazottak listája" Click="ContactQueryClick"/>
+                    <MenuItem  Header="Több üzlettel rendelkező tulajdonosok" Click="ContactQueryClick"/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem  Header="Lekérdezés összeálítás" Foreground="Black"/>

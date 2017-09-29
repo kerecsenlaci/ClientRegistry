@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Reporting.WinForms;
 using System.Collections.ObjectModel;
+using CRegistry.Dal;
 
 namespace ClientRegistry
 {
@@ -40,6 +41,21 @@ namespace ClientRegistry
             reportViewer.LocalReport.SetParameters(parameters);
             reportViewer.RefreshReport();
         }
+
+        //public ReportWindow(PartnersByCounty partners)
+        //{
+        //    InitializeComponent();
+        //    ReportDataSource reportDataSource = new ReportDataSource();
+        //    reportDataSource.Name = "CountyList";
+        //    reportDataSource.Value = partners.CountyList;
+        //    ReportDataSource reportDataSource2 = new ReportDataSource();
+        //    reportDataSource2.Name = "PartnerList";
+        //    reportDataSource2.Value = partners.PartnerList;
+        //    reportViewer.LocalReport.ReportPath = "..\\..\\Rdlc\\PartnersByCounty.rdlc";
+        //    reportViewer.LocalReport.DataSources.Add(reportDataSource);
+        //    reportViewer.LocalReport.DataSources.Add(reportDataSource2);
+        //    reportViewer.RefreshReport();
+        //}
 
         private void reportViewer_RenderingComplete(object sender, RenderingCompleteEventArgs e)
         {

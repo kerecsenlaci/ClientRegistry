@@ -343,6 +343,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>Város:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>Cím:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
@@ -357,19 +370,6 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Tulajdonos neve:</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Partner tipusa:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -412,6 +412,15 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>=Parameters!Type.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>=Parameters!Address.Value</Value>
                     <Style />
                   </TextRun>
@@ -422,15 +431,6 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!Owner.Value</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!Type.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>

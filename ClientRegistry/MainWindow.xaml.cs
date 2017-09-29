@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRegistry.Dal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,10 +71,18 @@ namespace ClientRegistry
             }
         }
 
-        private void ReportWindowClick(object sender, RoutedEventArgs e)
+        private void PartnerQueryClick(object sender, RoutedEventArgs e)
         {
-            //ReportWindow report = new ReportWindow();
-            //report.Show();
+            QueryPartnerVM queryPartner = new QueryPartnerVM(((MenuItem)sender).Header.ToString());
+            QueryWindow query = new QueryWindow() { DataContext = queryPartner };
+            query.Show();
+        }
+
+        private void ContactQueryClick(object sender, RoutedEventArgs e)
+        {
+            QueryContactVM queryContact = new QueryContactVM(((MenuItem)sender).Header.ToString());
+            QueryWindow query = new QueryWindow() { DataContext = queryContact };
+            query.Show();
         }
     }
 }

@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="DataModel\Contact.cs" />
     <Compile Include="DataModel\County.cs" />
+    <Compile Include="DataModel\MenuItems.cs" />
     <Compile Include="DataModel\Partner.cs" />
     <Compile Include="DataModel\PartnerType.cs" />
     <Compile Include="DataModel\User.cs" />
@@ -110,12 +111,16 @@
     <Compile Include="PartnersWindow.xaml.cs">
       <DependentUpon>PartnersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QueryWindow.xaml.cs">
+      <DependentUpon>QueryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ContactFormVM.cs" />
     <Compile Include="ViewModel\ContactsVM.cs" />
     <Compile Include="ViewModel\PartnerFormVM.cs" />
+    <Compile Include="ViewModel\QueryVM.cs" />
     <Compile Include="ViewModel\PartnersVM.cs" />
     <Compile Include="ViewModel\PartnerTypeVM.cs" />
     <Page Include="ContactFormWindow.xaml">
@@ -143,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PartnerTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,8 +184,10 @@
     <EmbeddedResource Include="Rdlc\PartnerForm.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Contact.datasource" />
+    <None Include="Properties\DataSources\CRegistry.Dal.Context.datasource" />
     <None Include="Properties\DataSources\Partner.datasource" />
     <None Include="Properties\DataSources\PartnerFormVM.datasource" />
+    <None Include="Properties\DataSources\PartnersByCounty.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
