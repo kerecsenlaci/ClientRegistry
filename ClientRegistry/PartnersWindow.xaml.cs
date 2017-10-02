@@ -81,5 +81,25 @@ namespace ClientRegistry
                 }
             }
         }
+
+        private void RemovePartnerClick(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PartnersVM)
+            {
+                PartnersVM partnersVM = DataContext as PartnersVM;
+                if (partnersVM != null && partnersVM.SelectedParameter != null)
+                {
+                    partnersVM.RemovePartner();
+                }
+            }
+            else
+            {
+                ContactsVM contactsVM = DataContext as ContactsVM;
+                if (contactsVM != null && contactsVM.SelectedParameter != null)
+                {
+                    contactsVM.RemovePartner();
+                }
+            }
+        }
     }
 }

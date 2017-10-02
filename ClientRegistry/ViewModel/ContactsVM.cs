@@ -57,5 +57,21 @@ namespace ClientRegistry
             }
             PartnerContactList.Add(SelectedParameter);
         }
+
+        internal void RemovePartner()
+        {
+            PartnerContactList.Remove(SelectedParameter);
+            //using (RegistryModel registry = new RegistryModel())
+            //{
+            //    var result = registry._switch.Where(x => x.ContactId == SelectedParameter.ID);
+            //    foreach (var item in result)
+            //    {
+            //        registry._switch.Remove(item);
+            //    }
+            //    registry.contacts.Remove(registry.contacts.First(x => x.ID == SelectedParameter.ID));
+            //    registry.SaveChanges();
+            //}
+            //PartnerContactList.Remove(SelectedParameter);
+        }
     }
 }

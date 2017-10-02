@@ -36,5 +36,11 @@ namespace ClientRegistry
             Status = contact.Status;
             
         }
+
+        public string GetTelInVcf()
+        {
+            return Phone.Substring(0, 3) + "-" + Phone.Substring(3, 3) + "-" + Phone.Substring(5);
+        }
+
     }
 }

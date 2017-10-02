@@ -105,6 +105,9 @@
     <Compile Include="DataModel\Partner.cs" />
     <Compile Include="DataModel\PartnerType.cs" />
     <Compile Include="DataModel\User.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PartnerFormWindow.xaml.cs">
       <DependentUpon>PartnerFormWindow.xaml</DependentUpon>
     </Compile>
@@ -117,13 +120,22 @@
     <Compile Include="ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ContactFormVM.cs" />
     <Compile Include="ViewModel\ContactsVM.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\PartnerFormVM.cs" />
     <Compile Include="ViewModel\QueryVM.cs" />
     <Compile Include="ViewModel\PartnersVM.cs" />
     <Compile Include="ViewModel\PartnerTypeVM.cs" />
+    <Compile Include="ViewModel\UserWindowVM.cs" />
     <Page Include="ContactFormWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

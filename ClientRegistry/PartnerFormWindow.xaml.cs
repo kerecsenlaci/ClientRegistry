@@ -29,7 +29,6 @@ namespace ClientRegistry
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
             var formVM = DataContext as PartnerFormVM;
             if (formVM.IsEdit && formVM.IsModified())
             {
@@ -46,7 +45,7 @@ namespace ClientRegistry
             ContactsVM contacts = new ContactsVM { IsPartnerAdd = ((PartnerFormVM)DataContext).ChosenPartner.ID,PartnerContactList= ((PartnerFormVM)DataContext).ContactsList };
             PartnersWindow partners = new PartnersWindow { DataContext = contacts, Title = "Elérhetőségek" };
             contacts.LoadPartnersList();
-            partners.Show();
+            partners.ShowDialog();
         }
 
         private void ContactRemoveClick(object sender, RoutedEventArgs e)
@@ -56,7 +55,7 @@ namespace ClientRegistry
                 formVM.RemoveContact();
         }
 
-        private void ListBox_Drop(object sender, DragEventArgs e)
+        private void ListBoxDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -73,10 +72,14 @@ namespace ClientRegistry
                 }
                 foreach (var file in formVM.DropFiles)
                 {
-                    var cformVm = new ContactFormVM();
-                    var window = new ContactFormWindow() { DataContext = cformVm};
-                    FileOperations.ProcessingFile(file, cformVm.ChosenContact=new Contact());
-                    window.ShowDialog();
+                    var fileCutting = FileOperations.FileCutting(file);
+                    foreach (var item in fileCutting)
+                    {
+                        var cformVm = new ContactFormVM();
+                        var window = new ContactFormWindow() { DataContext = cformVm };
+                        FileOperations.ProcessingVcardPeople(item, cformVm.ChosenContact = new Contact());
+                        window.ShowDialog();
+                    }
                 }
             }
         }

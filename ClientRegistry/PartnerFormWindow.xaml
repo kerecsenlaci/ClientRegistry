@@ -53,7 +53,7 @@
             <Label Content="Cím:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Foreground="White"/>
             <TextBox Text="{Binding ChosenPartner.Address,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Margin="50,0,0,0" Grid.Column="1" Grid.Row="2"/>
         </Grid>
-        <ListBox ItemsSource="{Binding ContactsList}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" Margin="10,0" AllowDrop="True" Grid.ColumnSpan="2" Drop="ListBox_Drop">
+        <ListBox ItemsSource="{Binding ContactsList}" SelectedItem="{Binding SelectedContact}" Grid.Row="1" Margin="10,0" AllowDrop="True" Grid.ColumnSpan="2" Drop="ListBoxDrop">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

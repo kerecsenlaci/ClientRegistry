@@ -21,9 +21,18 @@ namespace ClientRegistry
     /// </summary>
     public partial class MainWindow : Window
     {
+        LoginVM loginVM = new LoginVM();
         public MainWindow()
         {
             InitializeComponent();
+            if (loginVM.AuthenticateUser == null)
+            {
+                LoginWindow login = new LoginWindow() { DataContext = loginVM };
+                login.ShowDialog();
+                if (login.DialogResult != true)
+                    Close();
+            }
+            DataContext = loginVM;
         }
 
         private void ShutdownPrograming(object sender, EventArgs e)
@@ -83,6 +92,12 @@ namespace ClientRegistry
             QueryContactVM queryContact = new QueryContactVM(((MenuItem)sender).Header.ToString());
             QueryWindow query = new QueryWindow() { DataContext = queryContact };
             query.Show();
+        }
+
+        private void UserWindowClick(object sender, RoutedEventArgs e)
+        {
+            UserWindow window = new UserWindow();
+            window.ShowDialog();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,15 @@ namespace ClientRegistry
                     formVM.RestoreContact();
             }
                 
+        }
+
+        private void SaveVcardClick(object sender, RoutedEventArgs e)
+        {
+            var formVM = DataContext as ContactFormVM;
+            if (!formVM.IsEdit)
+                return;
+
+            FileOperations.SaveVcard(formVM.ChosenContact);
         }
     }
 }

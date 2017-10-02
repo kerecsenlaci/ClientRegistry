@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -21,23 +22,39 @@ namespace ClientRegistry
             }
         }
 
-        public static string[] FileCutting(string file)
+        public static List<string[]> FileCutting(string file)
         {
-            var begin = false;
-            var end = false;
-            string[] people;
+            List<string[]> PersonList = new List<string[]>();
 
             using (StreamReader sr = new StreamReader(file))
             {
-                people = File.ReadAllLines(file);
+                while (!sr.EndOfStream)
+                {
+                    var lineBegin = sr.ReadLine();
+                    if(lineBegin == "BEGIN:VCARD")
+                    {
+                        PersonList.Add(new string[] { "","",""});
+                        var line = "";
+                        for(var i=0; line != "END:VCARD";)
+                        {
+                            line = sr.ReadLine();
+                            if (line.StartsWith("FN")|| line.StartsWith("TEL") || line.StartsWith("EMAIL"))
+                            {
+                                PersonList.Last()[i] = line;
+                                i++;
+                            }
+                                
+                        }
+                    }
+                }
             }
-            return people;
+            return PersonList;
         }
 
-        public static void ProcessingFile(string file, Contact contact)
+        public static void ProcessingVcardPeople(string[] peopleVcard, Contact contact)
         {
-            string[] lines = File.ReadAllLines(file);
-            foreach (var line in lines)
+            
+            foreach (var line in peopleVcard)
             {
                 if (line.StartsWith("FN"))
                 {
@@ -56,6 +73,26 @@ namespace ClientRegistry
                 }
 
             }
+        }
+
+        public static void SaveVcard(Contact contact)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Névjegy fájl (*.vcf)|*.vcf";
+            if (saveFileDialog.ShowDialog() == true)
+                using (Stream myStream = saveFileDialog.OpenFile())
+                {
+                    using (StreamWriter sw = new StreamWriter(myStream, Encoding.Default))
+                    {
+                        sw.WriteLine("BEGIN:VCARD");
+                        sw.WriteLine("VERSION:2.1");
+                        sw.WriteLine($"FN:{contact.Name}");
+                        sw.WriteLine($"TEL;CELL:{contact.GetTelInVcf()}");
+                        sw.WriteLine($"EMAIL:{contact.Email}");
+                        sw.WriteLine("END:VCARD");
+                    }
+                }
+
         }
     }
 }

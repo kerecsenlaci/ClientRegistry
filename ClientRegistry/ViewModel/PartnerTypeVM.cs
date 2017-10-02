@@ -36,13 +36,13 @@ namespace ClientRegistry
             {
                 using (RegistryModel registry = new RegistryModel())
                 {
-                    registry.partnertype.Add(new PartnerTypeDbModel { Name=SelectedType.Name});
+                    registry.partnertype.Add(new PartnerTypeDbModel { Name = SelectedType.Name });
                     registry.SaveChanges();
                 }
                 IsEnabled = false;
                 return true;
             }
-            else if(SelectedType.ValidateType() && SelectedType.ID != 0)
+            else if (SelectedType.ValidateType() && SelectedType.ID != 0)
             {
                 using (RegistryModel registry = new RegistryModel())
                 {
@@ -53,7 +53,7 @@ namespace ClientRegistry
                 IsEnabled = false;
                 return true;
             }
-            
+
             return false;
         }
 
