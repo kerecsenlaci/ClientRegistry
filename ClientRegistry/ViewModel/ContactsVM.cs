@@ -58,20 +58,32 @@ namespace ClientRegistry
             PartnerContactList.Add(SelectedParameter);
         }
 
-        internal void RemovePartner()
+        internal bool RemovePartner()
         {
-            PartnerContactList.Remove(SelectedParameter);
-            //using (RegistryModel registry = new RegistryModel())
-            //{
-            //    var result = registry._switch.Where(x => x.ContactId == SelectedParameter.ID);
-            //    foreach (var item in result)
-            //    {
-            //        registry._switch.Remove(item);
-            //    }
-            //    registry.contacts.Remove(registry.contacts.First(x => x.ID == SelectedParameter.ID));
-            //    registry.SaveChanges();
-            //}
-            //PartnerContactList.Remove(SelectedParameter);
+            using (RegistryModel registry = new RegistryModel())
+            {
+                if(registry.partners.Count(x => x.OwnerId == SelectedParameter.ID)<=1)
+                {
+                    var result = registry._switch.Where(x => x.ContactId == SelectedParameter.ID);
+                    foreach (var item in result)
+                    {
+                        registry._switch.Remove(item);
+                    }
+                    registry.contacts.Remove(registry.contacts.First(x => x.ID == SelectedParameter.ID));
+                    registry.SaveChanges();
+                    PartnersList.Remove(SelectedParameter);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        internal void RefreshList()
+        {
+            PartnersList.Clear();
+            Context context = new Context();
+            foreach (var item in context.ContactList)
+                PartnersList.Add(new Contact(item));
         }
     }
 }

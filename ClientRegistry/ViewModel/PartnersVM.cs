@@ -50,7 +50,17 @@ namespace ClientRegistry
                 registry.partners.Remove(registry.partners.First(x => x.ID == SelectedParameter.ID));
                 registry.SaveChanges();
             }
-            //PartnersList.Remove(SelectedParameter);
+            PartnersList.Remove(SelectedParameter);
+        }
+
+        internal void RefreshList()
+        {
+            PartnersList.Clear();
+            Context context = new Context();
+            foreach (var item in context.PartnerList)
+            {
+                PartnersList.Add(new Partner(item));
+            }
         }
     }
 }

@@ -35,6 +35,7 @@ namespace ClientRegistry
                     PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
                     partnerForm.ValuesTransmission();
                     formWindow.ShowDialog();
+                    
                 }
             }
             else
@@ -68,6 +69,7 @@ namespace ClientRegistry
                     PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
                     partnerForm.ValuesTransmission();
                     formWindow.ShowDialog();
+                    partnersVM.RefreshList();
                 }
             }
             else
@@ -78,6 +80,7 @@ namespace ClientRegistry
                     ContactFormVM contactForm = new ContactFormVM { ChosenContact = new Contact(), IsEdit = false };
                     ContactFormWindow formWindow = new ContactFormWindow { DataContext = contactForm };
                     formWindow.ShowDialog();
+                    contactsVM.RefreshList();
                 }
             }
         }
@@ -97,7 +100,8 @@ namespace ClientRegistry
                 ContactsVM contactsVM = DataContext as ContactsVM;
                 if (contactsVM != null && contactsVM.SelectedParameter != null)
                 {
-                    contactsVM.RemovePartner();
+                    if (!contactsVM.RemovePartner())
+                        MessageBox.Show("Nem törölhető mert van másik partnert tulajdonosai is!");
                 }
             }
         }
