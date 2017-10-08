@@ -14,6 +14,7 @@ namespace ClientRegistry
         bool isEnabled;
         PartnerType _selectedType;
 
+        DataManager context = new DataManager();
         public ObservableCollection<PartnerType> PartnerTypeList { get; set; }
         public IEnumerable<PartnerType> FilteredPartnerTypeList { get { return PartnerTypeList; } }
         public PartnerType SelectedType { get { return _selectedType; } set { _selectedType = value; OnPropertyChange("SelectedType"); } }
@@ -21,10 +22,13 @@ namespace ClientRegistry
 
         public PartnerTypeVM():base()
         {
-            //IsEnabled = true;
-            Context context = new Context();
             PartnerTypeList = new ObservableCollection<PartnerType>();
-            foreach (var item in context.PartnerTypeList)
+            LoadTypeList();
+        }
+
+        void LoadTypeList()
+        {
+            foreach (var item in context.GetPartnerType())
             {
                 PartnerTypeList.Add(new PartnerType(item));
             }
@@ -34,22 +38,15 @@ namespace ClientRegistry
         {
             if (SelectedType.ValidateType() && SelectedType.ID == 0)
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    registry.partnertype.Add(new PartnerTypeDbModel { Name = SelectedType.Name });
-                    registry.SaveChanges();
-                }
+                context.AddPartnerType(SelectedType.Name);
                 IsEnabled = false;
+                PartnerTypeList.Clear();
+                LoadTypeList();
                 return true;
             }
             else if (SelectedType.ValidateType() && SelectedType.ID != 0)
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    var updateType = registry.partnertype.FirstOrDefault(p => p.ID == SelectedType.ID);
-                    updateType.Name = SelectedType.Name;
-                    registry.SaveChanges();
-                }
+                context.UpdatePartnerType(SelectedType.ID, SelectedType.Name);
                 IsEnabled = false;
                 return true;
             }
@@ -59,13 +56,10 @@ namespace ClientRegistry
 
         public bool RemovePartnerType()
         {
-            if (SelectedType != null && SelectedType.ID != 0)
+            if (SelectedType != null && SelectedType.ID != 0 && context.GetPartner().Where(x=>x.TypeId==SelectedType.ID).Count()==0)
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    var removeType = registry.partnertype.Remove(registry.partnertype.FirstOrDefault(p => p.ID == SelectedType.ID));
-                    registry.SaveChanges();
-                }
+                context.RemovePartnerType(SelectedType.ID);
+                PartnerTypeList.Remove(SelectedType);
                 return true;
             }
             return false;

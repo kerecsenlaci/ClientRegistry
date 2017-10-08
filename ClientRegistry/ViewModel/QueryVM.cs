@@ -11,6 +11,7 @@ namespace ClientRegistry
 {
     public class QueryPartnerVM
     {
+        DataManager context = new DataManager();
         public List<MenuItemsPartner> Querry { get; set; }
 
         public QueryPartnerVM(string menuHeader)
@@ -31,12 +32,11 @@ namespace ClientRegistry
         private void PartnerByType()
         {
             Querry = new List<MenuItemsPartner>();
-            Context context = new Context();
-            foreach (var item in context.PartnerTypeList)
+            foreach (var item in context.GetPartnerType())
             {
                 Querry.Add(new MenuItemsPartner() { Name = item.Name });
                 var lastElement = Querry.Last();
-                foreach (var partner in context.PartnerList)
+                foreach (var partner in context.GetPartner())
                 {
                     if (partner.TypeId == item.ID)
                         lastElement.Items.Add(new Partner(partner));
@@ -49,12 +49,11 @@ namespace ClientRegistry
         private void PartnerByCounty()
         {
             Querry = new List<MenuItemsPartner>();
-            Context context = new Context();
-            foreach (var item in context.CountyList)
+            foreach (var item in context.GetCounty())
             {
                 Querry.Add(new MenuItemsPartner() { Name = item.CountyName });
                 var lastElement = Querry.Last();
-                foreach (var partner in context.PartnerList)
+                foreach (var partner in context.GetPartner())
                 {
                     if (partner.CountyId == item.ID)
                         lastElement.Items.Add(new Partner(partner));
@@ -70,6 +69,7 @@ namespace ClientRegistry
     public class QueryContactVM
     {
         public List<MenuItemsContact> Querry { get; set; }
+        DataManager context = new DataManager();
 
         public QueryContactVM(string menuHeader)
         {
@@ -92,11 +92,10 @@ namespace ClientRegistry
         private void MoreBusiness()
         {
             Querry = new List<MenuItemsContact>();
-            Context context = new Context();
             Querry.Add(new MenuItemsContact() { Name = "Több üzlettel rendelkező tulajdonosok" });
-            foreach (var partner in context.ContactList)
+            foreach (var partner in context.GetContact())
             {
-                if (partner.Status == 4 && context.SwitchList.Count(x=>x.ContactId==partner.ID)>1)
+                if (partner.Status == 4 && context.GetSwitch().Count(x=>x.ContactId==partner.ID)>1)
                     Querry[0].Items.Add(new Contact(partner));
             }
         }
@@ -104,9 +103,8 @@ namespace ClientRegistry
         private void EmployeesList()
         {
             Querry = new List<MenuItemsContact>();
-            Context context = new Context();
             Querry.Add(new MenuItemsContact() { Name = "Alkalmazottak" });
-            foreach (var partner in context.ContactList)
+            foreach (var partner in context.GetContact())
             {
                 if (partner.Status != 4)
                     Querry[0].Items.Add(new Contact(partner));
@@ -116,9 +114,8 @@ namespace ClientRegistry
         private void OwnersList()
         {
             Querry = new List<MenuItemsContact>();
-            Context context = new Context();
             Querry.Add(new MenuItemsContact() { Name = "Tulajdonosok"});
-            foreach (var partner in context.ContactList)
+            foreach (var partner in context.GetContact())
             {
                 if (partner.Status == 4)
                     Querry[0].Items.Add(new Contact(partner));

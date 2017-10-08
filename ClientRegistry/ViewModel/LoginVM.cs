@@ -8,39 +8,30 @@ using System.Threading.Tasks;
 
 namespace ClientRegistry
 {
-    class LoginVM
+    public class LoginVM
     {
+        DataManager context = new DataManager();
         public User AuthenticateUser { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 
         public LoginVM()
         {
-            using (RegistryModel registry = new RegistryModel())
-            {
-                var result = registry.parameters.First(x => x.ParameterName == "NoLogin").ParameterValue=="T";
-                if (result)
-                {
-                    var admin = registry.users.First(x => x.ID == -1);
-                    AuthenticateUser = new User(admin);
-                }
-            }
+            if (context.GetParameretValue("NoLogin") == "Yes")
+                AuthenticateUser = new User(context.GetUser().First(x => x.ID == -1));    
         }
 
         public bool Authentication()
         {
-            using (RegistryModel registry = new RegistryModel())
+            var user = context.GetUser().FirstOrDefault(x => x.Name == UserName && x.Password == Password);
+            if (user != null)
             {
-                var user = registry.users.FirstOrDefault(x => x.Name == UserName && x.Password == Password);
-                if (user != null)
-                {
-                    AuthenticateUser = new User(user);
-                    return true;
-                }
+                AuthenticateUser = new User(user);
+                return true;
             }
+            
             return false;
         }
-
 
         public static string GetMd5Hash(MD5 md5Hash, string input)
         {
@@ -52,5 +43,6 @@ namespace ClientRegistry
             }
             return sBuilder.ToString();
         }
+
     }
 }

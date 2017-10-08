@@ -29,9 +29,9 @@ namespace ClientRegistry
             if(DataContext is PartnersVM)
             {
                 PartnersVM partnersVM = DataContext as PartnersVM;
-                if (partnersVM != null && partnersVM.SelectedParameter != null)
+                if (partnersVM != null && partnersVM.SelectedPartner != null)
                 {
-                    PartnerFormVM partnerForm = new PartnerFormVM { ChosenPartner = partnersVM.SelectedParameter, IsEdit = true };
+                    PartnerFormVM partnerForm = new PartnerFormVM { ChosenPartner = partnersVM.SelectedPartner, IsEdit = true };
                     PartnerFormWindow formWindow = new PartnerFormWindow { DataContext = partnerForm };
                     partnerForm.ValuesTransmission();
                     formWindow.ShowDialog();
@@ -41,15 +41,15 @@ namespace ClientRegistry
             else
             {
                 ContactsVM contactsVM = DataContext as ContactsVM;
-                if(contactsVM!=null && contactsVM.SelectedParameter != null && contactsVM.IsPartnerAdd!=null)
+                if(contactsVM!=null && contactsVM.SelectedPartner != null && contactsVM.IsPartnerAdd!=null)
                 {
                     contactsVM.AddContact();
-                    contactsVM.PartnersList.Remove(contactsVM.SelectedParameter);
+                    contactsVM.PartnersList.Remove(contactsVM.SelectedPartner);
                     return;
                 }
-                if(contactsVM!=null && contactsVM.SelectedParameter != null)
+                if(contactsVM!=null && contactsVM.SelectedPartner != null)
                     {
-                    ContactFormVM contactForm = new ContactFormVM { ChosenContact = contactsVM.SelectedParameter,IsEdit=true };
+                    ContactFormVM contactForm = new ContactFormVM { ChosenContact = contactsVM.SelectedPartner,IsEdit=true };
                     ContactFormWindow formWindow = new ContactFormWindow { DataContext = contactForm };
                     contactForm.CopyContact();
                     formWindow.ShowDialog();
@@ -90,7 +90,7 @@ namespace ClientRegistry
             if (DataContext is PartnersVM)
             {
                 PartnersVM partnersVM = DataContext as PartnersVM;
-                if (partnersVM != null && partnersVM.SelectedParameter != null)
+                if (partnersVM != null && partnersVM.SelectedPartner != null)
                 {
                     partnersVM.RemovePartner();
                 }
@@ -98,10 +98,12 @@ namespace ClientRegistry
             else
             {
                 ContactsVM contactsVM = DataContext as ContactsVM;
-                if (contactsVM != null && contactsVM.SelectedParameter != null)
+                var message = "A személy a pertnerektől is törlődni fog!\n\rBiztos hogy törli?";
+                if(MessageBox.Show(message,"Figyelmeztetés",MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                if (contactsVM != null && contactsVM.SelectedPartner != null)
                 {
-                    if (!contactsVM.RemovePartner())
-                        MessageBox.Show("Nem törölhető mert van másik partnert tulajdonosai is!");
+                    if (!contactsVM.RemoveContact())
+                        MessageBox.Show("Nem törölhető mert tulajdonos egy vagy több partnernél!");
                 }
             }
         }

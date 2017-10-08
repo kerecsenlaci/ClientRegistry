@@ -22,7 +22,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <ListBox SelectedItem="{Binding SelectedParameter}" ItemsSource="{Binding FilteredPartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick" Margin="20,10,20,0">
+        <ListBox SelectedItem="{Binding SelectedPartner}" ItemsSource="{Binding FilteredPartnersList}" Grid.Row="0" Grid.ColumnSpan="2" MouseDoubleClick="PartnerFormClick" Margin="20,10,20,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

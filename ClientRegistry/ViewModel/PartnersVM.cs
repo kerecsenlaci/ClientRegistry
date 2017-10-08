@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace ClientRegistry
 {
-    class PartnersVM : BaseModel
+    public class PartnersVM : BaseModel
     {
         private string _searchText;
 
+        DataManager context = new DataManager();
         public ObservableCollection<Partner> PartnersList { get; set; }
-        public Partner SelectedParameter { get; set; }
+        public Partner SelectedPartner { get; set; }
         public string SearchText
         {
             get { return _searchText; }
@@ -30,37 +31,22 @@ namespace ClientRegistry
 
         public PartnersVM()
         {
-            Context context = new Context();
             PartnersList = new ObservableCollection<Partner>();
-            foreach (var item in context.PartnerList)
-            {
+            foreach (var item in context.GetPartner())
                 PartnersList.Add(new Partner(item));
-            }
         }
 
         internal void RemovePartner()
         {
-            using (RegistryModel registry = new RegistryModel())
-            {
-                var result = registry._switch.Where(x => x.PartnerId == SelectedParameter.ID);
-                foreach (var item in result)
-                {
-                    registry._switch.Remove(item);
-                }
-                registry.partners.Remove(registry.partners.First(x => x.ID == SelectedParameter.ID));
-                registry.SaveChanges();
-            }
-            PartnersList.Remove(SelectedParameter);
+            context.RemovePartner(SelectedPartner.ID);
+            PartnersList.Remove(SelectedPartner);
         }
 
         internal void RefreshList()
         {
             PartnersList.Clear();
-            Context context = new Context();
-            foreach (var item in context.PartnerList)
-            {
+            foreach (var item in context.GetPartner())
                 PartnersList.Add(new Partner(item));
-            }
         }
     }
 }

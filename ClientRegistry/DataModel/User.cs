@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClientRegistry
 {
-    class User:BaseModel
+    public class User:BaseModel
     {
         string _name;
 

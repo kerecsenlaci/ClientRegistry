@@ -14,6 +14,7 @@ namespace ClientRegistry
         bool isEnabled;
         User _selectedType;
 
+        DataManager context = new DataManager();
         public ObservableCollection<User> UserList { get; set; }
         public IEnumerable<User> FilteredPartnerTypeList { get { return UserList; } }
         public User SelectedUser { get { return _selectedType; } set { _selectedType = value; OnPropertyChange("SelectedUser"); } }
@@ -21,57 +22,42 @@ namespace ClientRegistry
 
         public UserWindowVM():base()
         {
-            //IsEnabled = true;
-            Context context = new Context();
             UserList = new ObservableCollection<User>();
-            foreach (var item in context.UserList)
-            {
+            LoadUserList();
+        }
+
+        void LoadUserList()
+        {
+            foreach (var item in context.GetUser())
                 if (item.ID > 0)
                     UserList.Add(new User(item));
-            }
         }
 
         public bool SaveUser(string passBox1, string passBox2)
         {
-            
             if (ValidateUser() && ValidatePass(passBox1, passBox2) && SelectedUser.ID == 0)
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    registry.users.Add(new UserDbModel { Name = SelectedUser.Name, Password= SelectedUser.Password, Status=false });
-                    registry.SaveChanges();
-                }
+                context.AddUser(SelectedUser.Name, SelectedUser.Password);
                 IsEnabled = false;
+                UserList.Clear();
+                LoadUserList();
                 return true;
             }
             else if (ValidateUser() && SelectedUser.ID != 0)
             {
                 if (string.IsNullOrEmpty(passBox1) && string.IsNullOrEmpty(passBox2))
-                {
-                    using (RegistryModel registry = new RegistryModel())
-                    {
-                        var updateType = registry.users.FirstOrDefault(p => p.ID == SelectedUser.ID);
-                        updateType.Name = SelectedUser.Name;
-                        registry.SaveChanges();
-                    }
-                }
+                    context.UpdateUserName(SelectedUser.ID, SelectedUser.Name);
                 else
                 {
                     if (ValidatePass(passBox1, passBox2))
                     {
-                        using (RegistryModel registry = new RegistryModel())
-                        {
-                            var updateUser = registry.users.FirstOrDefault(p => p.ID == SelectedUser.ID);
-                            updateUser.Name = SelectedUser.Name;
-                            updateUser.Password = SelectedUser.Password;
-                            registry.SaveChanges();
-                        }
+                        context.UpdateUserName(SelectedUser.ID, SelectedUser.Name);
+                        context.UpdatePassword(SelectedUser.ID, SelectedUser.Password);
                     }
                 }
                 IsEnabled = false;
                 return true;
             }
-
             return false;
         }
 
@@ -99,11 +85,8 @@ namespace ClientRegistry
         {
             if (SelectedUser != null && SelectedUser.ID != 0)
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    var removeType = registry.users.Remove(registry.users.FirstOrDefault(p => p.ID == SelectedUser.ID));
-                    registry.SaveChanges();
-                }
+                context.RemoveUser(SelectedUser.ID);
+                UserList.Remove(SelectedUser);
                 return true;
             }
             return false;

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ClientRegistry
 {
-    class ContactFormVM
+    public class ContactFormVM
     {
+        DataManager context = new DataManager();
         public Contact ChosenContact { get; set; }
         public Contact BackupContact { get; set; }
         public bool IsEdit { get; set; }
@@ -42,25 +43,9 @@ namespace ClientRegistry
         internal void SavePartner()
         {
             if (IsEdit)
-            {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    var UpdatePartner = registry.contacts.FirstOrDefault(p => p.ID == ChosenContact.ID);
-                    UpdatePartner.Name = ChosenContact.Name;
-                    UpdatePartner.Phone = ChosenContact.Phone;
-                    UpdatePartner.Email = ChosenContact.Email;
-                    UpdatePartner.Status = ChosenContact.Status;
-                    registry.SaveChanges();
-                }
-            }  
+                context.UpdateContact(ChosenContact.ID, ChosenContact.Name, ChosenContact.Phone, ChosenContact.Email, ChosenContact.Status);
             else
-            {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    registry.contacts.Add(new ContactDbModel { Name= ChosenContact.Name,Email=ChosenContact.Email,Phone=ChosenContact.Phone,Status=ChosenContact.Status});
-                    registry.SaveChanges();
-                }
-            }
+                context.AddContact(new ContactDbModel { Name = ChosenContact.Name, Email = ChosenContact.Email, Phone = ChosenContact.Phone, Status = ChosenContact.Status });
         }
 
         public bool IsModified()

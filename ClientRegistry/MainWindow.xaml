@@ -39,19 +39,14 @@
                     <MenuItem  Header="Alkalmazottak listája" Click="ContactQueryClick"/>
                     <MenuItem  Header="Több üzlettel rendelkező tulajdonosok" Click="ContactQueryClick"/>
                 </MenuItem>
-                <Separator/>
-                <MenuItem  Header="Lekérdezés összeálítás" Foreground="Black"/>
-                <MenuItem  Header="Mentett egyedi lekérdezések" Foreground="Black"/>
             </MenuItem>
-            <MenuItem Header="Beállítások"/>
             <MenuItem Header="Kilépés" Click="ExitClick"/>
         </Menu>
         <GroupBox Grid.Column="0" Grid.Row="1" Header="Gyors menü" Foreground="White">
             <GroupItem>
                 <StackPanel>
-                    <Button Content="Partnerek" Margin="0,0,0,5" Click="PartnersClick"/>
-                    <Button Content="Elérhetőségek" Margin="0,0,0,5" Click="PartnersClick"/>
-                    <Button Content="Lekérdezések" Margin="0,0,0,5"/>
+                    <Button Content="Partnerek" Margin="0,0,0,15" Click="PartnersClick" FontSize="18" FontWeight="Bold"/>
+                    <Button Content="Elérhetőségek" Margin="0,0,0,15" Click="PartnersClick" FontSize="18" FontWeight="Bold"/>
                 </StackPanel>
             </GroupItem>
         </GroupBox>

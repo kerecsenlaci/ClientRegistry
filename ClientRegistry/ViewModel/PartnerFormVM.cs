@@ -11,6 +11,7 @@ namespace ClientRegistry
         PartnerType _selectedType;
         Contact _selectedContact;
 
+        DataManager context = new DataManager();
         public Partner ChosenPartner { get; set; }
         public Partner BackupContact { get; set; }
         public bool IsEdit { get; set; }
@@ -36,22 +37,21 @@ namespace ClientRegistry
             OwnersList = new ObservableCollection<Contact>();
             ContactsList = new ObservableCollection<Contact>();
 
-            Context context = new Context();
-            foreach (var item in context.CountyList)
+            foreach (var item in context.GetCounty())
             {
                 CountyList.Add(new County { ID = item.ID, CountyName = item.CountyName });
                 if (item.ID == ChosenPartner.CountyId)
                     SelectedCounty = CountyList.Last();
             }
                 
-            foreach (var item in context.PartnerTypeList)
+            foreach (var item in context.GetPartnerType())
             {
                 PartnerTypeList.Add(new PartnerType { ID = item.ID, Name = item.Name });
                 if (item.ID == ChosenPartner.TypeId)
                     SelectedType = PartnerTypeList.Last();
             }
                 
-            foreach (var item in context.ContactList)
+            foreach (var item in context.GetContact())
             {
                 if (item.Status == 4)
                     OwnersList.Add(new Contact(item));
@@ -59,10 +59,10 @@ namespace ClientRegistry
                     SelectedOwner = OwnersList.Last();
             }
 
-            foreach (var item in context.SwitchList)
+            foreach (var item in context.GetSwitch())
                 if (item.PartnerId == ChosenPartner.ID)
                     ContactsList.Add(new Contact( context
-                        .ContactList.FirstOrDefault(c => c.ID == item.ContactId)));
+                        .GetContact().FirstOrDefault(c => c.ID == item.ContactId)));
 
             if (IsEdit)
                 CopyChosenPartner();
@@ -70,16 +70,11 @@ namespace ClientRegistry
 
         internal void RemoveContact()
         {
-            using (RegistryModel registry = new RegistryModel())
-            {
-                var result = registry._switch.FirstOrDefault(x => x.PartnerId == ChosenPartner.ID && x.ContactId == SelectedContact.ID);
-                registry._switch.Remove(result);
-                registry.SaveChanges();
-            }
+            context.RemoveSwitchRecord(ChosenPartner.ID, SelectedContact.ID);
             ContactsList.Remove(SelectedContact);
         }
 
-        internal void CopyChosenPartner()
+        public void CopyChosenPartner()
         {
             BackupContact = new Partner();
             BackupContact.Name = ChosenPartner.Name;
@@ -91,7 +86,7 @@ namespace ClientRegistry
             BackupContact.Address = ChosenPartner.Address;
         }
 
-        internal void RestoreContact()
+        public void RestoreContact()
         {
             ChosenPartner.Name = BackupContact.Name;
             ChosenPartner.CountyId = BackupContact.CountyId;
@@ -158,27 +153,30 @@ namespace ClientRegistry
         {
             if (IsEdit)
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    var UpdatePartner = registry.partners.Where(p => p.ID == ChosenPartner.ID).FirstOrDefault();
-                    UpdatePartner.Name = ChosenPartner.Name;
-                    UpdatePartner.CountyId = ChosenPartner.CountyId;
-                    UpdatePartner.OwnerId = ChosenPartner.OwnerId;
-                    UpdatePartner.TypeId = ChosenPartner.TypeId;
-                    UpdatePartner.ZipCode = ChosenPartner.ZipCode;
-                    UpdatePartner.City = ChosenPartner.City;
-                    UpdatePartner.Address = ChosenPartner.Address;
-                    registry.SaveChanges();
-                }
+                context.UpdatePartner(new PartnerDbModel {
+                    ID = ChosenPartner.ID,
+                    Name = ChosenPartner.Name,
+                    TypeId = ChosenPartner.TypeId,
+                    CountyId = ChosenPartner.CountyId,
+                    ZipCode = ChosenPartner.ZipCode,
+                    Address = ChosenPartner.Address,
+                    City = ChosenPartner.City,
+                    OwnerId = ChosenPartner.OwnerId
+                });
             }
             else
             {
-                using (RegistryModel registry = new RegistryModel())
-                {
-                    registry.partners.Add(new PartnerDbModel { Name=ChosenPartner.Name,TypeId=ChosenPartner.TypeId,CountyId=ChosenPartner.CountyId,ZipCode=ChosenPartner.ZipCode,Address=ChosenPartner.Address,City=ChosenPartner.City,OwnerId=ChosenPartner.OwnerId});
-                    registry._switch.Add(new SwitchDbModel { PartnerId = ChosenPartner.ID, ContactId = SelectedOwner.ID });
-                    registry.SaveChanges();
-                }
+                context.AddPartner(new PartnerDbModel
+                {   Name = ChosenPartner.Name,
+                    TypeId = ChosenPartner.TypeId,
+                    CountyId = ChosenPartner.CountyId,
+                    ZipCode = ChosenPartner.ZipCode,
+                    Address = ChosenPartner.Address,
+                    City = ChosenPartner.City,
+                    OwnerId = ChosenPartner.OwnerId
+                });
+                context.AddRecordSwitch(context.GetPartner().Max(x=>x.ID), SelectedOwner.ID);
+                
             }
         }
     }

@@ -12,10 +12,11 @@ namespace ClientRegistry
     {
         private string _searchText;
 
+        DataManager context = new DataManager();
         public int? IsPartnerAdd { get; set; }
         public ObservableCollection<Contact> PartnersList { get; set; }
         public ObservableCollection<Contact> PartnerContactList { get; set; }
-        public Contact SelectedParameter { get; set; }
+        public Contact SelectedPartner { get; set; }
         public IEnumerable<Contact> FilteredPartnersList
         { get { if (SearchText == null) return PartnersList;
                 return PartnersList.Where(x => x.Name.ToUpper().StartsWith(SearchText.ToUpper())); } }
@@ -37,43 +38,29 @@ namespace ClientRegistry
 
         public void LoadPartnersList()
         {
-            Context context = new Context();
             PartnersList = new ObservableCollection<Contact>();
             if (IsPartnerAdd == null)
-                foreach (var item in context.ContactList)
+                foreach (var item in context.GetContact())
                     PartnersList.Add(new Contact(item));
             else
-                foreach (var item in context.ContactList)
-                    if (!context.SwitchList.Where(x => x.PartnerId == IsPartnerAdd).ToList().Exists(x => x.ContactId == item.ID && x.PartnerId == IsPartnerAdd))
+                foreach (var item in context.GetContact())
+                    if (!context.GetSwitch().Where(x => x.PartnerId == IsPartnerAdd).ToList().Exists(x => x.ContactId == item.ID && x.PartnerId == IsPartnerAdd))
                         PartnersList.Add(new Contact(item));
         }
 
         internal void AddContact()
         {
-            using (RegistryModel registry = new RegistryModel())
-            {
-                registry._switch.Add(new SwitchDbModel { PartnerId = (int)IsPartnerAdd, ContactId = SelectedParameter.ID });
-                registry.SaveChanges();
-            }
-            PartnerContactList.Add(SelectedParameter);
+            context.AddRecordSwitch((int)IsPartnerAdd, SelectedPartner.ID);
+            PartnerContactList.Add(SelectedPartner);
         }
 
-        internal bool RemovePartner()
+        internal bool RemoveContact()
         {
-            using (RegistryModel registry = new RegistryModel())
+            if (context.GetPartner().Count(x => x.OwnerId == SelectedPartner.ID) == 0)
             {
-                if(registry.partners.Count(x => x.OwnerId == SelectedParameter.ID)<=1)
-                {
-                    var result = registry._switch.Where(x => x.ContactId == SelectedParameter.ID);
-                    foreach (var item in result)
-                    {
-                        registry._switch.Remove(item);
-                    }
-                    registry.contacts.Remove(registry.contacts.First(x => x.ID == SelectedParameter.ID));
-                    registry.SaveChanges();
-                    PartnersList.Remove(SelectedParameter);
-                    return true;
-                }
+                context.RemoveContact(SelectedPartner.ID);
+                PartnersList.Remove(SelectedPartner);
+                return true;
             }
             return false;
         }
@@ -81,8 +68,7 @@ namespace ClientRegistry
         internal void RefreshList()
         {
             PartnersList.Clear();
-            Context context = new Context();
-            foreach (var item in context.ContactList)
+            foreach (var item in context.GetContact())
                 PartnersList.Add(new Contact(item));
         }
     }

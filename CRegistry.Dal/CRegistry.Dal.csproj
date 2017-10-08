@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactDbModel.cs" />
-    <Compile Include="Context.cs" />
+    <Compile Include="DataManager.cs" />
     <Compile Include="CountyDbModel.cs" />
     <Compile Include="ParameterDbModel.cs" />
     <Compile Include="PartnerDbModel.cs" />
