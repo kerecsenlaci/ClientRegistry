@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CRegistry.Dal;
+
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace ClientRegistry.Tests
 {
@@ -122,7 +124,24 @@ namespace ClientRegistry.Tests
             Assert.AreEqual(formVM.ChosenPartner.Address, formVM.BackupContact.Address);
         }
 
-      
+        //[TestMethod]
+        //public void DataManager_AddPartner()
+        //{
+        //    DataManager manager = new DataManager();
+        //    var count = manager.GetContact().Count();
+        //    manager.AddContact(new ContactDbModel { Name = "Ez teszt adat", Phone = "000000", Status = 0, Email = "teszt@adat.hu" });
+        //    Assert.AreEqual(count + 1, manager.GetContact().Count());
+        //}
+
+        //[TestMethod]
+        //public void DataManager_UpdateContact()
+        //{
+        //    DataManager manager = new DataManager();
+        //    //manager.UpdateContact(manager.GetContact().Max(x=>x.ID), "Ez teszt adat Módosítva", "000000", "teszt@adat.hu",0);
+        //    Assert.AreEqual("Ez teszt adat Módosítva", );
+        //}
+
+
 
     }
 }
