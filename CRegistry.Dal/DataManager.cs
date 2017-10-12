@@ -12,7 +12,7 @@ namespace CRegistry.Dal
 
         public DataManager()
         {
-            
+
         }
 
 

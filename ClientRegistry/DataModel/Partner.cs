@@ -16,13 +16,13 @@ namespace ClientRegistry
         public int ID { get; set; }
         public string Name { get { return _name; } set { _name = value; OnPropertyChange("Name"); } }
         public int? TypeId { get; set; }
-        public int? CountyId { get { return _countyId; } set { _countyId = value; OnPropertyChange("CountyId"); OnPropertyChange("CityName"); OnPropertyChange("LowerIndex"); } }
+        public int? CountyId { get { return _countyId; } set { _countyId = value; OnPropertyChange("CountyId"); OnPropertyChange("CountyName"); OnPropertyChange("LowerIndex"); } }
         public int ZipCode { get; set; }
         public string City { get { return _city; } set { _city = value; OnPropertyChange("City"); OnPropertyChange("LowerIndex"); } }
         public string Address { get; set; }
         public int OwnerId { get; set; }
-        public string LowerIndex { get { return $"megye: {CityName}\t\tváros: {City}"; } }
-        string CityName {
+        public string LowerIndex { get { return $"megye: {CountyName}\tváros: {City}"; } }
+        string CountyName {
             get
             {
                 using(RegistryModel registry = new RegistryModel())

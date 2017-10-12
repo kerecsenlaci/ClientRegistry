@@ -4,11 +4,12 @@ using CRegistry.Dal;
 
 using System.Security.Cryptography;
 using System.Linq;
+using System.IO;
 
 namespace ClientRegistry.Tests
 {
     [TestClass]
-    public class ViewModelTests
+    public class ClienRegTests
     {
 
         [TestMethod]
@@ -125,7 +126,7 @@ namespace ClientRegistry.Tests
         }
 
         //[TestMethod]
-        //public void DataManager_AddPartner()
+        //public void DataManager_AddPartner_Test()
         //{
         //    DataManager manager = new DataManager();
         //    var count = manager.GetContact().Count();
@@ -134,14 +135,53 @@ namespace ClientRegistry.Tests
         //}
 
         //[TestMethod]
-        //public void DataManager_UpdateContact()
+        //public void DataManager_UpdateContact_Test()
         //{
         //    DataManager manager = new DataManager();
-        //    //manager.UpdateContact(manager.GetContact().Max(x=>x.ID), "Ez teszt adat Módosítva", "000000", "teszt@adat.hu",0);
-        //    Assert.AreEqual("Ez teszt adat Módosítva", );
+        //    manager.UpdateContact(manager.GetContact().Max(x=>x.ID), "Ez teszt adat Módosítva", "000000", "teszt@adat.hu",0);
+        //    var result = manager.GetContact().FirstOrDefault(x => x.Name == "Ez teszt adat Módosítva").Name;
+        //    Assert.IsNotNull(result);
+
         //}
 
+        //[TestMethod]
+        //public void DataManager_RemoveContact_Test()
+        //{
+        //    DataManager manager = new DataManager();
+        //    manager.RemoveContact(manager.GetContact().FirstOrDefault(x => x.Name == "Ez teszt adat Módosítva").ID);
+        //    var result = manager.GetContact().FirstOrDefault(x => x.Name == "Ez teszt adat Módosítva").Name;
+        //    Assert.IsNull(result);
+        //}
 
+        //[TestMethod]
+        //public void DataManager_GetParamValue_Test()
+        //{
+        //    DataManager manager = new DataManager();
+        //    var result = manager.GetParameretValue("NoLogin");
+        //    Assert.IsNotNull(result);
+        //}
 
+        [TestMethod]
+        public void FileOperations_SaveVcard_Test()
+        {
+            FileOperations.SaveVcard(new Contact { Name = "Teszt Alfréd", Phone = "000000000", Email = "teszt.alfred@example.com" });
+            ///TODO Az elérési útnak és a fájlnévnek valósnak kell lenni!!!! 
+            Assert.IsTrue(File.Exists(@"C:\Users\Laci\Desktop\TesztVcard.vcf"));
+        }
+
+        [TestMethod]
+        public void FileOperations_ProcessingVcardPeople_Test()
+        {
+            var message = "";
+            var cForm = new ContactFormVM();
+            cForm.ChosenContact = new Contact();
+            var list = FileOperations.FileCutting(@"C:\Users\Laci\Desktop\TesztVcard.vcf");
+            foreach (var item in list)
+            {
+                FileOperations.ProcessingVcardPeople(item,cForm.ChosenContact);
+            }
+            Assert.IsTrue(cForm.ChosenContactValidate(out message));
+            Assert.IsTrue(string.IsNullOrEmpty(message));
+        }
     }
 }

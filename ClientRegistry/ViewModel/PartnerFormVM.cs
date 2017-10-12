@@ -61,7 +61,7 @@ namespace ClientRegistry
 
             foreach (var item in context.GetSwitch())
                 if (item.PartnerId == ChosenPartner.ID)
-                    ContactsList.Add(new Contact( context
+                    ContactsList.Add(new Contact(context
                         .GetContact().FirstOrDefault(c => c.ID == item.ContactId)));
 
             if (IsEdit)
