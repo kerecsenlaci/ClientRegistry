@@ -39,6 +39,8 @@ namespace ClientRegistry
 
         public string GetTelInVcf()
         {
+            if (Phone[0] == '+')
+                return Phone;
             return Phone.Substring(0, 3) + "-" + Phone.Substring(3, 3) + "-" + Phone.Substring(5);
         }
 

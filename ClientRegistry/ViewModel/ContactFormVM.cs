@@ -42,10 +42,30 @@ namespace ClientRegistry
 
         internal void SavePartner()
         {
+            PhoneNumberValidation();
             if (IsEdit)
                 context.UpdateContact(ChosenContact.ID, ChosenContact.Name, ChosenContact.Phone, ChosenContact.Email, ChosenContact.Status);
             else
                 context.AddContact(new ContactDbModel { Name = ChosenContact.Name, Email = ChosenContact.Email, Phone = ChosenContact.Phone, Status = ChosenContact.Status });
+        }
+
+        private void PhoneNumberValidation()
+        {
+            var newPhone = "";
+            IEnumerable<char> array;
+
+            if (ChosenContact.Phone[0] == '+')
+            {
+                newPhone += ChosenContact.Phone[0];
+                array = ChosenContact.Phone.Skip(1).ToList();
+            }
+            else
+                array = ChosenContact.Phone.ToList();
+
+            foreach (var item in array)
+                if (char.IsNumber(item))
+                    newPhone += item;
+            ChosenContact.Phone = newPhone;
         }
 
         public bool IsModified()

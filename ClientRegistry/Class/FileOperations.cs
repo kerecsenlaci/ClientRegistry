@@ -82,7 +82,7 @@ namespace ClientRegistry
             if (saveFileDialog.ShowDialog() == true)
                 using (Stream myStream = saveFileDialog.OpenFile())
                 {
-                    using (StreamWriter sw = new StreamWriter(myStream, Encoding.Default))
+                    using (StreamWriter sw = new StreamWriter(myStream))
                     {
                         sw.WriteLine("BEGIN:VCARD");
                         sw.WriteLine("VERSION:2.1");

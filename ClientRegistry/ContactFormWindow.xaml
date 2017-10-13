@@ -29,7 +29,7 @@
         <Label Content="Email cím:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Foreground="White"/>
         <Label Content="Sátusz:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Foreground="White"/>
         <TextBox Text="{Binding ChosenContact.Name,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1"/>
-        <TextBox Text="{Binding ChosenContact.Phone,UpdateSourceTrigger=PropertyChanged}" MaxLength="15" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1" Grid.Row="1" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox Text="{Binding ChosenContact.Phone,UpdateSourceTrigger=PropertyChanged}" MaxLength="18" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1" Grid.Row="1" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox Text="{Binding ChosenContact.Email,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1" Grid.Row="2"/>
         <ComboBox SelectedIndex="{Binding ChosenContact.Status,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200" Grid.Column="1" Grid.Row="3">
             <ComboBoxItem Content="Dolgozó"/>
