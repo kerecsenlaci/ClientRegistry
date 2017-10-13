@@ -81,7 +81,7 @@ INSERT INTO `county` (`ID`, `CountyName`) VALUES
 (17, 'Vas megye'),
 (18, 'Veszprém megye'),
 (19, 'Zala megye'),
-(20, 'Budapest');
+(20, 'Egyéb');
 
 -- --------------------------------------------------------
 
@@ -95,6 +95,13 @@ CREATE TABLE `parameters` (
   `ParameterValue` varchar(20) COLLATE utf8_hungarian_ci NOT NULL,
   `Comment` varchar(60) COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `parameters`
+--
+
+INSERT INTO `parameters` (`ID`, `ParameterName`, `ParameterValue`, `Comment`) VALUES
+(1, 'NoLogin', 'No', 'Nincs bejelentkezés');
 
 -- --------------------------------------------------------
 
@@ -118,8 +125,8 @@ CREATE TABLE `partners` (
 --
 
 INSERT INTO `partners` (`ID`, `Name`, `TypeId`, `CountyId`, `ZipCode`, `City`, `Address`, `OwnerId`) VALUES
-(1, 'Teszt Kft', 1, 20, 1114, '', '', 2),
-(2, 'SDC Bt', 3, 13, 2145, 'Kerepes', '', 1);
+(1, 'Teszt Kft', 1, 13, 1111, 'Budapes', 'Teszt u. 1.', 2),
+(2, 'SDC Bt', 3, 13, 2145, 'Kerepes', 'Semmi krt. 11', 1);
 
 -- --------------------------------------------------------
 
@@ -165,6 +172,14 @@ CREATE TABLE `users` (
   `Password` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
   `Status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `users`
+--
+
+INSERT INTO `users` (`ID`, `Name`, `Password`, `Status`) VALUES
+(-1, 'Administrator', '02c758bf69c8e228d37ca626297e21fd', 0),
+(1, 'Admin', 'e3afed0047b08059d0fada10f400c1e5', 0),
 
 --
 -- Indexek a kiírt táblákhoz
